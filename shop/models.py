@@ -45,7 +45,7 @@ class CustomUser(AbstractUser):
 class Category(models.Model):
     name = models.CharField(max_length=254)
     description = models.CharField(max_length=254, null=True)
-    parent = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
+    parent = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -136,4 +136,6 @@ class Comment(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     content = models.CharField(max_length=254)
-    replyComment = models.ForeignKey('Comment', on_delete=models.SET_NULL, null=True)
+    replyComment = models.ForeignKey('Comment', on_delete=models.SET_NULL, null=True, blank=True)
+    create_at = models.DateField(null=True, blank=True, default=datetime.date.today)
+    update_at = models.DateField(null=True, blank=True)
