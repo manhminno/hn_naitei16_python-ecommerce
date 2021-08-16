@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import os
-
+from django.utils.translation import ugettext_lazy as _
 from pathlib import Path
 
+import os
 import environ
 
 env = environ.Env(
@@ -48,11 +48,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
+    'crispy_forms',
+    'phone_field',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,12 +117,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+
 AUTH_USER_MODEL = 'shop.CustomUser'
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
+LOGIN_REDIRECT_URL = "/detail-profile"
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
+
+LANGUAGES = (("en-us", _("English")), ("vi", _("Vietnamese")))
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'shop/locale')]
 
 TIME_ZONE = 'UTC'
 
@@ -129,8 +137,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

@@ -1,0 +1,48 @@
+{% load i18n %}
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-default navbar-fixed-top">
+    <div class="container">
+        <a href="/"> <img src="{% static "img/logo.png" %}" height="30px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        {% trans "Home" %}
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{% trans "About" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{% trans "Contact" %}</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="dropdown ">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.username }}<span ></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'shop:detail-profile' %}" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{% trans " User settings" %}</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'shop:logout' %}?next=/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>{% trans " Logout" %}</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'signup' %}" class="nav-link">
+                            <span  aria-hidden="true"></span>&nbsp;{% trans "Register" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;{% trans "Login" %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
