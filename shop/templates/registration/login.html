@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+<h2>{% trans "Login" %}</h2>
+{% block title %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        {% trans "Login" %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% include "registration/messages.html" %}
+    {% csrf_token %}
+    {{ form|crispy }}
+    <p></p>
+    <button type="submit">{% trans "Login" %}</button>
+</form>
+{% endblock %}

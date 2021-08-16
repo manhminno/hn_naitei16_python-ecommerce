@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<!-- Header -->
+{% include "layouts/header.html" %}
+
+<body>
+    <!-- Navigation -->
+    {% include "layouts/navigation.html" %}
+
+    <!-- Page Content -->
+    &nbsp
+    <div class="container">
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    &nbsp
+
+    <!-- Footer -->
+    {% include "layouts/footer.html" %}
+</body>
+</html>
