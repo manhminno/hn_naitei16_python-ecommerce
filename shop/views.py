@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.forms import modelform_factory
 from django.shortcuts import redirect, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
-
+from django.views.generic import ListView,View,DetailView
+from shop.models import Product,Category
 from .forms import SignUpForm
 
 
@@ -45,3 +46,28 @@ def detail_profile(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+class ShopView(ListView):
+    model = Product
+    paginate_by = 6
+    
+    def get_context_data(self, **kwargs):
+        if self.kwargs:
+            category = Category.objects.filter(id=self.kwargs['pk']).first()
+            product = Product.objects.filter(category=category)
+            context = super().get_context_data(object_list=product,**kwargs)
+            list_data = context['object_list']
+            context['data'] = []
+            for value in list_data:
+                url = 'images/'+value.image_set.first().url
+                context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
+            return context
+        else:
+            context = super().get_context_data(**kwargs)
+            list_data = context['object_list']
+            context['data'] = []
+            for value in list_data:
+                url = 'images/'+value.image_set.first().url
+                context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
+            return context

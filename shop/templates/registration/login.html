@@ -12,11 +12,13 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% include "registration/messages.html" %}
-    {% csrf_token %}
-    {{ form|crispy }}
-    <p></p>
-    <button type="submit">{% trans "Login" %}</button>
-</form>
+<div class="container" >
+    <form method="post">
+        {% include "registration/messages.html" %}
+        {% csrf_token %}
+        {{ form|crispy }}
+        <p></p>
+        <button type="submit">{% trans "Login" %}</button>
+    </form>
+</div>
 {% endblock %}

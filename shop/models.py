@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager
+from django.urls import reverse
 import datetime
 
 class MyAccountManager(BaseUserManager):
@@ -49,6 +50,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('shop:category', args=[str(self.id)]) 
 
 
 class Product(models.Model):
@@ -60,6 +64,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name     
+    
+    def get_absolute_url(self):
+        return reverse('shop:product-detail', args=[str(self.id)]) 
 
 
 class Image(models.Model):
