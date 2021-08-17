@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 14:50+0700\n"
+"POT-Creation-Date: 2021-08-16 17:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,8 +91,36 @@ msgstr ""
 
 #: .\templates\layouts\navigation.html:41 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
-#: .\templates\registration\login.html:20
+#: .\templates\registration\login.html:21
 msgid "Login"
+msgstr ""
+
+#: .\templates\shop\category.html:7
+msgid "Categories"
+msgstr ""
+
+#: .\templates\shop\category.html:13
+msgid "All"
+msgstr ""
+
+#: .\templates\shop\category.html:23
+msgid "Filters"
+msgstr ""
+
+#: .\templates\shop\category.html:28
+msgid "Price"
+msgstr ""
+
+#: .\templates\shop\category.html:39
+msgid "Filter"
+msgstr ""
+
+#: .\templates\shop\category.html:44
+msgid "Range"
+msgstr ""
+
+#: .\templates\shop\category.html:50
+msgid "Search Products..."
 msgstr ""
 
 #: .\templates\shop\detail-profile.html:12
@@ -103,11 +131,43 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
+#: .\templates\shop\product_list.html:9
+msgid "Shop"
+msgstr ""
+
+#: .\templates\shop\product_list.html:12
+msgid "All categories"
+msgstr ""
+
+#: .\templates\shop\product_list.html:29
+msgid "Default Sorting"
+msgstr ""
+
+#: .\templates\shop\product_list.html:30
+msgid "Popularity"
+msgstr ""
+
+#: .\templates\shop\product_list.html:31
+msgid "Price: low to high"
+msgstr ""
+
+#: .\templates\shop\product_list.html:32
+msgid "Price: high to low"
+msgstr ""
+
+#: .\templates\shop\product_list.html:37
+msgid "FilterPrice"
+msgstr ""
+
+#: .\templates\shop\product_list.html:66
+msgid "Add to Cart"
+msgstr ""
+
 #: .\templates\shop\signup.html:5 .\templates\shop\signup.html:8
-#: .\templates\shop\signup.html:16
+#: .\templates\shop\signup.html:17
 msgid "Sign up"
 msgstr ""
 
-#: .\views.py:21
+#: .\views.py:22
 msgid "Successful registration, you can log in now."
 msgstr ""
