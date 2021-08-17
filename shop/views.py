@@ -60,7 +60,7 @@ class ShopView(ListView):
             list_data = context['object_list']
             context['data'] = []
             for value in list_data:
-                url = 'images/'+value.image_set.first().url
+                url = 'img/'+value.image_set.first().url
                 context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
             return context
         else:
@@ -68,6 +68,25 @@ class ShopView(ListView):
             list_data = context['object_list']
             context['data'] = []
             for value in list_data:
-                url = 'images/'+value.image_set.first().url
+                url = 'img/'+value.image_set.first().url
                 context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
             return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = []
+        context['related_products'] = []
+        category = context['product'].category
+        product = Product.objects.filter(category=category)
+        for value_related_products in product:
+            url_related_products = 'img/'+value_related_products.image_set.first().url
+            context['related_products'].append({'product': value_related_products, 'image': value_related_products.image_set.first(),'url': url_related_products})
+        for value in context['product'].image_set.all():
+            url = value.url.split('.')
+            id =  url[0]
+            context['images'].append({'url': 'img/'+ value.url, 'id_img': id})
+        return context
