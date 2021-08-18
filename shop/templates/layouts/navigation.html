@@ -27,6 +27,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'shop:detail-profile' %}" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>{% trans " User settings" %}</a></li>
                             <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'shop:change-password' %}"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>{% trans " Change password" %}</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="{% url 'shop:logout' %}?next=/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>{% trans " Logout" %}</a></li>
                         </ul>
                     </li>

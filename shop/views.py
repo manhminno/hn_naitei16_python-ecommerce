@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.forms import modelform_factory
@@ -47,6 +48,25 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST or None)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            my_message = _('Your password was successfully updated. Please log in again!')
+            messages.success(request, my_message)
+            logout(request)
+
+            return redirect('login')
+
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    for field in form.fields.values():
+        field.help_text = None
+    
+    return render(request, 'shop/change_password.html', {'form': form})
 
 class ShopView(ListView):
     model = Product

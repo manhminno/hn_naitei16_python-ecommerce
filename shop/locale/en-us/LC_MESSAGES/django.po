@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 17:21+0700\n"
+"POT-Creation-Date: 2021-08-18 10:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Confirm password"
 msgstr ""
 
-#: .\forms.py:17 .\templates\shop\detail-profile.html:15
+#: .\forms.py:17 .\templates\layouts\profile-base.html:16
 msgid "Email"
 msgstr ""
 
@@ -82,17 +82,25 @@ msgid " User settings"
 msgstr ""
 
 #: .\templates\layouts\navigation.html:30
+msgid " Change password"
+msgstr ""
+
+#: .\templates\layouts\navigation.html:32
 msgid " Logout"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:36
+#: .\templates\layouts\navigation.html:38
 msgid "Register"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:41 .\templates\registration\login.html:5
+#: .\templates\layouts\navigation.html:43 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
-#: .\templates\registration\login.html:21
+#: .\templates\registration\login.html:29
 msgid "Login"
+msgstr ""
+
+#: .\templates\registration\login.html:20 .\templates\shop\signup.html:17
+msgid "Welcome to my shop!"
 msgstr ""
 
 #: .\templates\shop\category.html:7
@@ -123,51 +131,70 @@ msgstr ""
 msgid "Search Products..."
 msgstr ""
 
-#: .\templates\shop\detail-profile.html:12
+#: .\templates\shop\change_password.html:7
+msgid "Change your password"
+msgstr ""
+
+#: .\templates\shop\change_password.html:8
+msgid "Save and change"
+msgstr ""
+
+#: .\templates\shop\detail-profile.html:6
 msgid "Profile"
 msgstr ""
 
-#: .\templates\shop\detail-profile.html:22
+#: .\templates\shop\detail-profile.html:7
 msgid "Update profile"
 msgstr ""
 
-#: .\templates\shop\product_list.html:9
+#: .\templates\shop\product_list.html:10
 msgid "Shop"
 msgstr ""
 
-#: .\templates\shop\product_list.html:12
+#: .\templates\shop\product_list.html:13
 msgid "All categories"
 msgstr ""
 
-#: .\templates\shop\product_list.html:29
+#: .\templates\shop\product_list.html:26
 msgid "Default Sorting"
 msgstr ""
 
-#: .\templates\shop\product_list.html:30
+#: .\templates\shop\product_list.html:27
 msgid "Popularity"
 msgstr ""
 
-#: .\templates\shop\product_list.html:31
+#: .\templates\shop\product_list.html:28
 msgid "Price: low to high"
 msgstr ""
 
-#: .\templates\shop\product_list.html:32
+#: .\templates\shop\product_list.html:29
 msgid "Price: high to low"
 msgstr ""
 
-#: .\templates\shop\product_list.html:37
+#: .\templates\shop\product_list.html:34
 msgid "FilterPrice"
 msgstr ""
 
-#: .\templates\shop\product_list.html:66
+#: .\templates\shop\product_list.html:59
 msgid "Add to Cart"
 msgstr ""
 
 #: .\templates\shop\signup.html:5 .\templates\shop\signup.html:8
-#: .\templates\shop\signup.html:17
 msgid "Sign up"
 msgstr ""
 
-#: .\views.py:22
+#: .\templates\shop\signup.html:25
+msgid "Register now"
+msgstr ""
+
+#: .\views.py:23
 msgid "Successful registration, you can log in now."
+msgstr ""
+
+#: .\views.py:57
+msgid "Your password was successfully updated. Please log in again!"
+msgstr ""
+
+#: .\views.py:62
+msgid "Please correct the error below!"
 msgstr ""

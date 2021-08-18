@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 17:21+0700\n"
+"POT-Creation-Date: 2021-08-18 10:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr "Mật khẩu"
 msgid "Confirm password"
 msgstr "Xác nhận mật khẩu"
 
-#: .\forms.py:17 .\templates\shop\detail-profile.html:15
+#: .\forms.py:17 .\templates\layouts\profile-base.html:16
 msgid "Email"
 msgstr "Email"
 
@@ -83,18 +83,26 @@ msgid " User settings"
 msgstr " Cài đặt người dùng"
 
 #: .\templates\layouts\navigation.html:30
+msgid " Change password"
+msgstr " Đổi mật khẩu"
+
+#: .\templates\layouts\navigation.html:32
 msgid " Logout"
 msgstr " Đăng xuất"
 
-#: .\templates\layouts\navigation.html:36
+#: .\templates\layouts\navigation.html:38
 msgid "Register"
 msgstr "Đăng ký"
 
-#: .\templates\layouts\navigation.html:41 .\templates\registration\login.html:5
+#: .\templates\layouts\navigation.html:43 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
-#: .\templates\registration\login.html:21
+#: .\templates\registration\login.html:29
 msgid "Login"
 msgstr "Đăng nhập"
+
+#: .\templates\registration\login.html:20 .\templates\shop\signup.html:17
+msgid "Welcome to my shop!"
+msgstr "Chào mừng đến với cửa hàng của chúng tôi!"
 
 #: .\templates\shop\category.html:7
 msgid "Categories"
@@ -124,51 +132,70 @@ msgstr "Từ"
 msgid "Search Products..."
 msgstr "Tìm kiếm sản phẩm ..."
 
-#: .\templates\shop\detail-profile.html:12
+#: .\templates\shop\change_password.html:7
+msgid "Change your password"
+msgstr "Thay đổi mật khẩu"
+
+#: .\templates\shop\change_password.html:8
+msgid "Save and change"
+msgstr "Lưu và thay đổi"
+
+#: .\templates\shop\detail-profile.html:6
 msgid "Profile"
 msgstr "Thông tin của bạn"
 
-#: .\templates\shop\detail-profile.html:22
+#: .\templates\shop\detail-profile.html:7
 msgid "Update profile"
 msgstr "Cập nhật"
 
-#: .\templates\shop\product_list.html:9
+#: .\templates\shop\product_list.html:10
 msgid "Shop"
 msgstr "Cửa Hàng"
 
-#: .\templates\shop\product_list.html:12
+#: .\templates\shop\product_list.html:13
 msgid "All categories"
 msgstr " Tất cả loại sản phẩm "
 
-#: .\templates\shop\product_list.html:29
+#: .\templates\shop\product_list.html:26
 msgid "Default Sorting"
 msgstr "Phân loại mặc định"
 
-#: .\templates\shop\product_list.html:30
+#: .\templates\shop\product_list.html:27
 msgid "Popularity"
 msgstr "Phổ biến"
 
-#: .\templates\shop\product_list.html:31
+#: .\templates\shop\product_list.html:28
 msgid "Price: low to high"
 msgstr "Giá : thấp đến cao"
 
-#: .\templates\shop\product_list.html:32
+#: .\templates\shop\product_list.html:29
 msgid "Price: high to low"
 msgstr "Giá: cao đến thấp"
 
-#: .\templates\shop\product_list.html:37
+#: .\templates\shop\product_list.html:34
 msgid "FilterPrice"
 msgstr "Lọc Giá"
 
-#: .\templates\shop\product_list.html:66
+#: .\templates\shop\product_list.html:59
 msgid "Add to Cart"
 msgstr "Thêm vào giỏ hàng"
 
 #: .\templates\shop\signup.html:5 .\templates\shop\signup.html:8
-#: .\templates\shop\signup.html:17
 msgid "Sign up"
 msgstr "Đăng ký"
 
-#: .\views.py:22
+#: .\templates\shop\signup.html:25
+msgid "Register now"
+msgstr "Đăng ký ngay"
+
+#: .\views.py:23
 msgid "Successful registration, you can log in now."
 msgstr "Đăng ký thành công, bạn có thể đăng nhập ngay bây giờ."
+
+#: .\views.py:57
+msgid "Your password was successfully updated. Please log in again!"
+msgstr "Bạn đã thay đổi mật khẩu thành công. Vui lòng đăng nhập lại!"
+
+#: .\views.py:62
+msgid "Please correct the error below!"
+msgstr "Hãy sửa các lỗi bên dưới!"
