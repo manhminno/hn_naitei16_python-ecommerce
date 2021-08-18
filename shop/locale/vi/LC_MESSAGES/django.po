@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-18 10:01+0700\n"
+"POT-Creation-Date: 2021-08-18 14:53+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,7 @@ msgstr "Lọc"
 msgid "Range"
 msgstr "Từ"
 
-#: .\templates\shop\category.html:50
+#: .\templates\shop\category.html:52
 msgid "Search Products..."
 msgstr "Tìm kiếm sản phẩm ..."
 
@@ -156,27 +156,31 @@ msgstr "Cửa Hàng"
 msgid "All categories"
 msgstr " Tất cả loại sản phẩm "
 
-#: .\templates\shop\product_list.html:26
+#: .\templates\shop\product_list.html:23
+msgid "Search results for"
+msgstr "Kết quả tìm kiếm cho"
+
+#: .\templates\shop\product_list.html:29
 msgid "Default Sorting"
 msgstr "Phân loại mặc định"
 
-#: .\templates\shop\product_list.html:27
+#: .\templates\shop\product_list.html:30
 msgid "Popularity"
 msgstr "Phổ biến"
 
-#: .\templates\shop\product_list.html:28
+#: .\templates\shop\product_list.html:31
 msgid "Price: low to high"
 msgstr "Giá : thấp đến cao"
 
-#: .\templates\shop\product_list.html:29
+#: .\templates\shop\product_list.html:32
 msgid "Price: high to low"
 msgstr "Giá: cao đến thấp"
 
-#: .\templates\shop\product_list.html:34
+#: .\templates\shop\product_list.html:37
 msgid "FilterPrice"
 msgstr "Lọc Giá"
 
-#: .\templates\shop\product_list.html:59
+#: .\templates\shop\product_list.html:62
 msgid "Add to Cart"
 msgstr "Thêm vào giỏ hàng"
 
@@ -188,14 +192,13 @@ msgstr "Đăng ký"
 msgid "Register now"
 msgstr "Đăng ký ngay"
 
-#: .\views.py:23
+#: .\views.py:26
 msgid "Successful registration, you can log in now."
 msgstr "Đăng ký thành công, bạn có thể đăng nhập ngay bây giờ."
 
-#: .\views.py:57
+#: .\views.py:60
 msgid "Your password was successfully updated. Please log in again!"
 msgstr "Bạn đã thay đổi mật khẩu thành công. Vui lòng đăng nhập lại!"
 
-#: .\views.py:62
-msgid "Please correct the error below!"
-msgstr "Hãy sửa các lỗi bên dưới!"
+#~ msgid "Please correct the error below!"
+#~ msgstr "Hãy sửa các lỗi bên dưới!"

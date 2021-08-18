@@ -8,8 +8,12 @@ from django.forms import modelform_factory
 from django.shortcuts import redirect, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView,View,DetailView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from shop.models import Product,Category
 from .forms import SignUpForm
+from .utils.constant import length_page
+import re
 
 
 def index(request):
@@ -70,7 +74,7 @@ def change_password(request):
 
 class ShopView(ListView):
     model = Product
-    paginate_by = 6
+    paginate_by = length_page
     
     def get_context_data(self, **kwargs):
         if self.kwargs:
@@ -78,18 +82,12 @@ class ShopView(ListView):
             product = Product.objects.filter(category=category)
             context = super().get_context_data(object_list=product,**kwargs)
             list_data = context['object_list']
-            context['data'] = []
-            for value in list_data:
-                url = 'img/'+value.image_set.first().url
-                context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
+            context['data'] = format_data(list_data)
             return context
         else:
             context = super().get_context_data(**kwargs)
             list_data = context['object_list']
-            context['data'] = []
-            for value in list_data:
-                url = 'img/'+value.image_set.first().url
-                context['data'].append({'product': value, 'image': value.image_set.first(),'url': url})
+            context['data'] = format_data(list_data)
             return context
 
 
@@ -99,14 +97,47 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['images'] = []
-        context['related_products'] = []
         category = context['product'].category
         product = Product.objects.filter(category=category)
-        for value_related_products in product:
-            url_related_products = 'img/'+value_related_products.image_set.first().url
-            context['related_products'].append({'product': value_related_products, 'image': value_related_products.image_set.first(),'url': url_related_products})
+        context['related_products'] = format_data(product)
         for value in context['product'].image_set.all():
             url = value.url.split('.')
             id =  url[0]
             context['images'].append({'url': 'img/'+ value.url, 'id_img': id})
         return context
+
+
+def product_search(request):
+    query = request.GET['search_product']
+    value_search = re.split("\s", query, flags=re.UNICODE)
+    arr_search = []
+    for value in value_search:
+        if value:
+            arr_search.append(value)
+    str_search = " ".join(arr_search)
+    query = str_search
+    results = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    page = request.GET.get('page')
+    listData = format_data(results)
+    if listData:
+        paginator = Paginator(listData, length_page)
+        try:
+            listData = paginator.page(page)
+        except PageNotAnInteger:
+            listData = paginator.page(1)
+        except EmptyPage:
+            listData = paginator.page(1)
+    wishlist = None
+    return render(
+        request,
+        'shop/product_list.html',
+        {'data': listData, 'wishlist': wishlist , 'query':query}
+    )
+
+
+def format_data(data):
+    result = []
+    for value in data:
+        url = 'img/'+value.image_set.first().url
+        result.append({'product': value, 'image': value.image_set.first(),'url': url})
+    return result
