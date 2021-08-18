@@ -9,12 +9,25 @@
 {% endblock %}
 
 {%block content %}
-<div class="container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <p></p>
-        <button type="submit">{% trans "Sign up" %}</button>
-    </form>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <center><strong class="panel-title" style="color:green; font-size:25px;">{% trans "Welcome to my shop!" %}</strong></center>
+                    </div>
+                    <div class="panel-body">
+                        <center>
+                            <form accept-charset="UTF-8" role="form" method="post">
+                                {% csrf_token %}
+                                {{ form|crispy }}       
+                                <p></p>
+                                <input class="btn btn-lg btn-success btn-block" type="submit" value="{% trans 'Register now' %}">
+                            </form>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

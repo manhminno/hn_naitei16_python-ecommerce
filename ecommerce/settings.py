@@ -121,7 +121,7 @@ AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 AUTH_USER_MODEL = 'shop.CustomUser'
 
-LOGIN_REDIRECT_URL = "/detail-profile"
+LOGIN_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = "en-us"
 

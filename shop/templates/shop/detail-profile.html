@@ -1,26 +1,9 @@
 {% extends 'base.html'%}
 {% load i18n %}
-{% load crispy_forms_tags%} 
-{% load static%} 
+{% load static%}
 
 {%block content%}
-    <div class="row my-4">
-        <div class="col-md-6 col-12 p-4">
-            <img src="{% static 'img/avt.svg' %}" alt="Avatar" class="img-fluid" />
-        </div>
-        <div class="col-md-6 col-12 d-flex justify-content-center flex-column">
-            <h2 class="text-center mb-3">{% trans "Profile" %}</h2>
-            <form method="POST" style="width:100%">
-                <div class="form-group">
-                    <label>{% trans "Email" %}</label>
-                    <input readonly type="email" value="{{user.email}}" class="form-control" >
-                </div>
-                {% csrf_token %}
-                {{form|crispy}}
-                <p></p>
-                <hr>
-                <button class="btn btn-success" type="submit">{% trans "Update profile" %}</button>
-            </form>
-        </div>
-    </div>
+    {% trans "Profile" as title %}
+    {% trans "Update profile" as button %}
+    {% include "layouts/profile-base.html" with title=title button_text=button %}
 {% endblock content %}
