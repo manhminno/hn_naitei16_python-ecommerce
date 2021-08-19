@@ -19,6 +19,9 @@
         <div class="row">
             {% include "shop/category.html" %}
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                {% if query %}
+                    <h3>{% trans "Search results for" %} : {{query}}</h3>
+                {% endif %}
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
@@ -74,6 +77,29 @@
                     {% endfor %}
                 </div>
                 <br>
+                {% if query %}
+                <div class="flex-m flex-w p-t-26">
+                    {% if data.has_previous %}
+                    <a class="page-link" href="{{ request.get_full_path }}&page={{ data.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    {% endif %}
+                    {% for i in data.paginator.page_range %}
+                        {% if data.number == i %}
+                        <a href="{{ request.get_full_path }}&page={{ i }}"class="item-pagination flex-c-m trans-0-4 active-pagination">{{data.number}}</a>
+                        {% else %}
+                        <a href="{{ request.get_full_path }}&page={{ i }}"class="item-pagination flex-c-m trans-0-4">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if data.has_next %}
+                    <a class="page-link" href="{{ request.get_full_path }}&page={{ data.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
                 <!-- Pagination -->
                 {% if is_paginated %}
                 <div class="flex-m flex-w p-t-26">
@@ -83,7 +109,13 @@
                         <span class="sr-only">Previous</span>
                     </a>
                     {% endif %}
-                    <a href="?page={{ page_obj.number }}"class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                        <a href="?page={{ i }}"class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
+                        {% else %}
+                        <a href="?page={{ i }}"class="item-pagination flex-c-m trans-0-4">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
                     {% if page_obj.has_next %}
                     <a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
