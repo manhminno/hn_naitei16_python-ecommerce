@@ -67,6 +67,9 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse('shop:product-detail', args=[str(self.id)]) 
+    
+    def get_add_to_cart_url(self):
+        return reverse('shop:add_to_cart', args=[str(self.id)])
 
 
 class Image(models.Model):
@@ -91,8 +94,8 @@ class Order(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.SET_NULL, null=True)
     create_at = models.DateField(null=True, blank=True, default=datetime.date.today)
     approve_at = models.DateField(null=True, blank=True)
-    phone = models.CharField(max_length=254, null=True)
-    address = models.CharField(max_length=254, null=True)
+    phone = models.CharField(max_length=254, null=True, blank=True)
+    address = models.CharField(max_length=254, null=True, blank=True)
     
     LOAN_STATUS = (
         ('p', 'Paid'),

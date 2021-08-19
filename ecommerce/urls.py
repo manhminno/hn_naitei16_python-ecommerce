@@ -22,10 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('shop.urls', 'shop'), namespace='shop')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
-
-urlpatterns += i18n_patterns(
-    path('', include('django.contrib.auth.urls')),
-    path('', include('shop.urls')),
-    # path('', RedirectView.as_view(url='shop/', permanent=True)),
-)
