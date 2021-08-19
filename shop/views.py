@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView,View,DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from shop.models import Product,Category
+from shop.models import Item, Order, Product,Category, Size
 from .forms import SignUpForm
 from .utils.constant import length_page
 import re
@@ -133,6 +133,31 @@ def product_search(request):
         'shop/product_list.html',
         {'data': listData, 'wishlist': wishlist , 'query':query}
     )
+
+
+@login_required
+def cart_detail(request):
+    order = get_object_or_404(Order, user = request.user, status = 'n')
+    data = order.item_set.select_related('product')
+    list_data = []
+    for value in data:
+        url = 'img/'+value.product.image_set.first().url
+        setattr(value, "url", url)
+        setattr(value, "total", value.amount * value.product.price)
+        list_data.append(value)
+    return render(request,'shop/cart.html',{'data': list_data})
+
+
+@login_required
+def add_to_cart(request,pk):
+    obj, created = Order.objects.get_or_create(user = request.user, status = 'n')
+    product = get_object_or_404(Product, id=pk)
+    size = get_object_or_404(Size, description=request.POST['size'])
+    item, itemCreated = Item.objects.update_or_create(order = obj, product = product, size = size)
+    item.amount += int(request.POST['num-product'])
+    item.save()
+    obj.save()
+    return redirect('shop:cart_detail')
 
 
 def format_data(data):
