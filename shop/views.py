@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView,View,DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 from shop.models import Item, Order, Product,Category, Size
 from .forms import SignUpForm
 from .utils.constant import length_page
@@ -138,7 +139,7 @@ def product_search(request):
 @login_required
 def cart_detail(request):
     order = get_object_or_404(Order, user = request.user, status = 'n')
-    data = order.item_set.select_related('product')
+    data = order.item_set.select_related('product').select_related('size')
     list_data = []
     for value in data:
         url = 'img/'+value.product.image_set.first().url
@@ -158,6 +159,32 @@ def add_to_cart(request,pk):
     item.save()
     obj.save()
     return redirect('shop:cart_detail')
+
+
+def remove_cart(request, pk):
+    try:
+        Item.objects.get(id = pk).delete()
+        return redirect('shop:cart_detail')
+    except ObjectDoesNotExist:
+        message = _("Not found item with ID = {}".format(pk))
+        messages.error(request, message)
+        return redirect('shop:cart_detail')
+    except:
+        return redirect('shop:cart_detail')
+
+
+def update_cart(request, pk):
+    try:
+        item = Item.objects.get(id=pk)
+        item.amount = request.POST['num-product']
+        item.save()
+        return redirect('shop:cart_detail')
+    except ObjectDoesNotExist:
+        message = _("Not found item with ID = {}".format(pk))
+        messages.error(request, message)
+        return redirect('shop:cart_detail',err = message)
+    except:
+        return redirect('shop:cart_detail')
 
 
 def format_data(data):
