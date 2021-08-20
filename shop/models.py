@@ -119,6 +119,12 @@ class Item(models.Model):
     price = models.FloatField(null=True)
     amount = models.IntegerField(default=0)
 
+    def get_remove_cart_url(self):
+        return reverse('shop:remove_cart', args=[str(self.id)])
+    
+    def get_update_cart_url(self):
+        return reverse('shop:update_cart', args=[str(self.id)])
+
 
 class Sale(models.Model):
     value = models.FloatField()
