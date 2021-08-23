@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-20 14:44+0700\n"
+"POT-Creation-Date: 2021-08-23 09:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,22 +84,26 @@ msgid "Order"
 msgstr " giỏ hàng "
 
 #: .\templates\layouts\navigation.html:31
+msgid " Your wishlist"
+msgstr " Đồ ưu thích"
+
+#: .\templates\layouts\navigation.html:33
 msgid " User settings"
 msgstr " Cài đặt người dùng"
 
-#: .\templates\layouts\navigation.html:33
+#: .\templates\layouts\navigation.html:35
 msgid " Change password"
 msgstr " Đổi mật khẩu"
 
-#: .\templates\layouts\navigation.html:35
+#: .\templates\layouts\navigation.html:37
 msgid " Logout"
 msgstr " Đăng xuất"
 
-#: .\templates\layouts\navigation.html:41
+#: .\templates\layouts\navigation.html:43
 msgid "Register"
 msgstr "Đăng ký"
 
-#: .\templates\layouts\navigation.html:46 .\templates\registration\login.html:5
+#: .\templates\layouts\navigation.html:48 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
 #: .\templates\registration\login.html:29
 msgid "Login"
@@ -113,7 +117,7 @@ msgstr "Chào mừng đến với cửa hàng của chúng tôi!"
 msgid "Cart"
 msgstr "Giỏ hàng "
 
-#: .\templates\shop\cart.html:19
+#: .\templates\shop\cart.html:19 .\templates\shop\user_wish_list.html:21
 msgid "Product"
 msgstr "Sản phẩm"
 
@@ -122,6 +126,7 @@ msgid "Size"
 msgstr "Cỡ"
 
 #: .\templates\shop\cart.html:21 .\templates\shop\category.html:28
+#: .\templates\shop\user_wish_list.html:22
 msgid "Price"
 msgstr "Giá"
 
@@ -182,7 +187,7 @@ msgid "Update profile"
 msgstr "Cập nhật"
 
 #: .\templates\shop\product_detail.html:96
-#: .\templates\shop\product_list.html:62
+#: .\templates\shop\product_list.html:61
 msgid "Add to Cart"
 msgstr "Thêm vào giỏ hàng"
 
@@ -233,6 +238,22 @@ msgstr "Đăng ký"
 #: .\templates\shop\signup.html:25
 msgid "Register now"
 msgstr "Đăng ký ngay"
+
+#: .\templates\shop\user_wish_list.html:8
+msgid "Your wishlist"
+msgstr " Đồ ưu thích"
+
+#: .\templates\shop\user_wish_list.html:28
+msgid "IMG-Product"
+msgstr "Ảnh sản phẩm"
+
+#: .\templates\shop\user_wish_list.html:39
+msgid "Delete"
+msgstr "Xóa"
+
+#: .\templates\shop\user_wish_list.html:47
+msgid "You have not added anything to wishlist!"
+msgstr "Bạn chưa thêm gì vào danh sách cả!"
 
 #: .\views.py:28
 msgid "Successful registration, you can log in now."

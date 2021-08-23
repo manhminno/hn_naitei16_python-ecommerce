@@ -193,3 +193,26 @@ def format_data(data):
         url = 'img/'+value.image_set.first().url
         result.append({'product': value, 'image': value.image_set.first(),'url': url})
     return result
+
+
+@login_required
+def wishlist(request):
+    products = Product.objects.filter(users_wishlist=request.user)
+    listData = format_data(products)
+
+    return render(request, "shop/user_wish_list.html", {"wishlist": listData})
+
+
+@login_required
+def add_to_wishlist(request, id):
+    product = get_object_or_404(Product, id=id)
+    product.users_wishlist.add(request.user)
+    
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+@login_required
+def remove_from_wishlist(request, id):
+    request.user.user_wishlist.remove(id)
+
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
