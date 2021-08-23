@@ -3,10 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 from .models import CustomUser
-from .utils.constant import regex
+from .utils.constant import REGEX
 
 class SignUpForm(UserCreationForm):
-    phone_regex = RegexValidator(regex, message=_('Wrong phone number format!'))
+    phone_regex = RegexValidator(REGEX, message=_('Wrong phone number format!'))
     phone = forms.CharField(validators=[phone_regex], max_length=17, label=_('Phone'))
     username = forms.CharField(required=True, max_length=30, label=_('Username'))
     first_name = forms.CharField(required=True, max_length=30, label=_('First name'))

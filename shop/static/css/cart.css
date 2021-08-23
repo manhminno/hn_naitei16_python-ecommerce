@@ -119,3 +119,25 @@
     -moz-transition: all 0.3s;
     opacity: 0;
 }
+.form-control{
+    border: 1px solid #ccc !important;
+}
+.cancel_order{
+    background-color: #555555 !important;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 10px;
+}
+.cancel_order:hover{
+    background-color: #9e1313 !important;
+}
+.cancel_order a{
+    text-decoration: none !important;
+    color : #ffffff !important;
+    font-size: 20px;
+}
+.payment{
+    border: 1px solid #ccc !important;
+    padding: 20px;
+    margin-bottom: 20px;
+}

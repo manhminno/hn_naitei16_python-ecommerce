@@ -21,8 +21,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">{% trans "Contact" %}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shop:cart_detail' %}">{% trans "Order" %}</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle nav-link"  id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% trans "Order" %}
+                    </a>
+                    <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item" href="{% url 'shop:cart_detail' %}">{% trans "Order" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:payment_detail' %}">{% trans "Waiting Order" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:cancel_order_detail' %}">{% trans "Canceled Order" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:history_order' %}">{% trans "History Order" %}</a></li>
+                    </ul>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="dropdown ">

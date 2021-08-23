@@ -10,10 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView,View,DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from shop.models import Item, Order, Product,Category, Size
 from .forms import SignUpForm
-from .utils.constant import length_page
+from .utils.constant import LENGTH_PAGE, STATUS_ORDER
 import re
 
 
@@ -75,7 +76,7 @@ def change_password(request):
 
 class ShopView(ListView):
     model = Product
-    paginate_by = length_page
+    paginate_by = LENGTH_PAGE
     
     def get_context_data(self, **kwargs):
         if self.kwargs:
@@ -121,7 +122,7 @@ def product_search(request):
     page = request.GET.get('page')
     listData = format_data(results)
     if listData:
-        paginator = Paginator(listData, length_page)
+        paginator = Paginator(listData, LENGTH_PAGE)
         try:
             listData = paginator.page(page)
         except PageNotAnInteger:
@@ -138,20 +139,26 @@ def product_search(request):
 
 @login_required
 def cart_detail(request):
-    order = get_object_or_404(Order, user = request.user, status = 'n')
-    data = order.item_set.select_related('product').select_related('size')
-    list_data = []
-    for value in data:
-        url = 'img/'+value.product.image_set.first().url
-        setattr(value, "url", url)
-        setattr(value, "total", value.amount * value.product.price)
-        list_data.append(value)
-    return render(request,'shop/cart.html',{'data': list_data})
+    try:
+        order = Order.objects.get(user = request.user, status = STATUS_ORDER['not_paid'])
+        data = order.item_set.select_related('product')
+        list_data = []
+        total = 0 
+        for value in data:
+            url = 'img/'+value.product.image_set.first().url
+            setattr(value, "url", url)
+            setattr(value, "total", value.amount * value.product.price)
+            list_data.append(value)
+            total = total + value.amount * value.product.price
+        return render(request,'shop/cart.html',{'data': list_data, 'total': total, 'user': request.user ,"message": ""})
+    except ObjectDoesNotExist:
+        message = _("You have not ordered any products yet")
+        return render(request,'shop/cart.html',{'message': message})
 
 
 @login_required
 def add_to_cart(request,pk):
-    obj, created = Order.objects.get_or_create(user = request.user, status = 'n')
+    obj, created = Order.objects.get_or_create(user = request.user, status = STATUS_ORDER['not_paid'])
     product = get_object_or_404(Product, id=pk)
     size = get_object_or_404(Size, description=request.POST['size'])
     item, itemCreated = Item.objects.update_or_create(order = obj, product = product, size = size)
@@ -161,6 +168,7 @@ def add_to_cart(request,pk):
     return redirect('shop:cart_detail')
 
 
+@login_required
 def remove_cart(request, pk):
     try:
         Item.objects.get(id = pk).delete()
@@ -173,6 +181,7 @@ def remove_cart(request, pk):
         return redirect('shop:cart_detail')
 
 
+@login_required
 def update_cart(request, pk):
     try:
         item = Item.objects.get(id=pk)
@@ -216,3 +225,86 @@ def remove_from_wishlist(request, id):
     request.user.user_wishlist.remove(id)
 
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+@login_required
+def add_payment(request):
+    try:
+        order = get_object_or_404(Order, user = request.user, status = STATUS_ORDER['not_paid'])
+        order.create_at = timezone.now()
+        order.phone = request.POST['phone']
+        order.address = request.POST['address']
+        order.status = STATUS_ORDER['waitting']
+        order.save()
+        return redirect('shop:payment_detail')
+    except ObjectDoesNotExist:
+        message = _("Not found order with ID = {}").format(pk)
+        messages.error(request, message)
+        return redirect('shop:payment_detail')
+
+
+@login_required
+def payment_detail(request):
+    try:
+        orders = Order.objects.filter(user = request.user, status = STATUS_ORDER['waitting'])
+        list_order = format_data_order(orders)
+        return render(request,'shop/payment.html',{'list_order': list_order, 'tilte_name': _('order waiting for pending'), 'message':"", "title": "WAITING_ORDER"})
+    except ObjectDoesNotExist:
+        message = _("you have no pending orders")
+        return render(request,'shop/cart.html',{'message': message})
+
+
+@login_required
+def cancel_order(request,pk):
+    try:
+        order = Order.objects.get(id = pk)
+        order.status = STATUS_ORDER['cancel']
+        order.approve_at = timezone.now()
+        order.save()
+        return redirect('shop:cancel_order_detail')
+    except ObjectDoesNotExist:
+        message = _("Not found order with ID = {}").format(pk)
+        messages.error(request, message)
+        return redirect('shop:cancel_order_detail')
+    except:
+        return redirect('shop:cancel_order_detail')
+
+
+@login_required
+def cancel_order_detail(request):
+    orders = Order.objects.filter(user = request.user, status = STATUS_ORDER['cancel'])
+    if orders:
+        list_order = format_data_order(orders)
+        return render(request,'shop/payment.html',{'list_order': list_order, 'tilte_name': _('order has been canceled'), 'message':"", "title": "CANCELED_ORDER"})
+    else:
+        message = _("you have no canceled orders")
+        return render(request,'shop/payment.html',{'tilte_name': _('order has been canceled'),'message': message})
+
+
+@login_required
+def history_order(request):
+    orders = Order.objects.filter(user = request.user, status = STATUS_ORDER['paid'])
+    if orders:
+        list_order = format_data_order(orders)
+        return render(request,'shop/payment.html',{'list_order': list_order, 'tilte_name': _('Purchased orders'), 'message':"", "title": "HISTORY_ORDER"})
+    else:
+        message = _("you have no Purchase orders")
+        return render(request,'shop/payment.html',{'tilte_name': _('Purchased orders'),'message': message})
+
+
+def format_data_order(orders):
+    list_order = []
+    for order in orders:
+        data = order.item_set.select_related('product')
+        list_data = []
+        total = 0 
+        for value in data:
+            url = 'img/'+value.product.image_set.first().url
+            setattr(value, "url", url)
+            setattr(value, "total", value.amount * value.product.price)
+            list_data.append(value)
+            total = total + value.amount * value.product.price
+        setattr(order, "data", list_data) 
+        setattr(order, "total", total) 
+        list_order.append(order)
+    return list_order
