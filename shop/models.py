@@ -61,6 +61,7 @@ class Product(models.Model):
     price = models.FloatField(default=0)
     activate = models.BooleanField(default=True)
     description = models.CharField(max_length=254, null=True)
+    users_wishlist = models.ManyToManyField('CustomUser', related_name="user_wishlist", blank=True)
 
     def __str__(self):
         return self.name     

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m background-cart">
+    <h2 class="l-text2 t-center">
+        {% trans "Your wishlist" %}
+    </h2>
+</section>
+
+<section class="cart bgwhite p-t-70 p-b-100">
+    <div class="container">
+        <!-- Cart item -->
+        <div class="container-table-cart pos-relative">
+            <div class="wrap-table-shopping-cart bgwhite">
+                {% if wishlist %}
+                    <table class="table-shopping-cart">
+                        <tr class="table-head">
+                            <th class="column-1"></th>
+                            <th class="column-2">{% trans "Product" %}</th>
+                            <th class="column-3">{% trans "Price" %}</th>
+                        </tr>
+                        {% for item in wishlist %}
+                            <tr class="table-row">
+                                <td class="column-1">
+                                    <div class="wish-list">
+                                        <a href="{{item.product.get_absolute_url}}"><img src="{% static item.url %}" alt="{% trans 'IMG-Product' %}"></a>
+                                    </div>
+                                </td>
+                                <td class="column-2">
+                                    <a href="{{item.product.get_absolute_url}}">{{item.product.name}}</a>
+                                    <p>{{item.product.description}}</p>
+                                </td>
+                                <td class="column-3">{{item.product.price}}</td>
+                                <td class="column-4" style="width:100px">
+                                    <a href="{% url 'shop:remove_to_wishlist' item.product.id %}">
+                                        <button class="wish-button flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                            {% trans "Delete" %}
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <h2>{% trans "You have not added anything to wishlist!" %}</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

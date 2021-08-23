@@ -15,4 +15,7 @@ urlpatterns = [
     path('logout', views.user_logout, name='logout'),
     url('signup', views.signup, name='signup'),
     path('change-password', views.change_password, name='change-password'),
+    path("wishlist", views.wishlist, name="wishlist"),
+    path("wishlist/add_to_wishlist/<int:id>", views.add_to_wishlist, name="user_wishlist"),
+    path("wishlist/remove_to_wishlist/<int:id>", views.remove_from_wishlist, name="remove_to_wishlist"),
 ]

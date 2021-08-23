@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-20 14:44+0700\n"
+"POT-Creation-Date: 2021-08-23 09:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,22 +83,26 @@ msgid "Order"
 msgstr ""
 
 #: .\templates\layouts\navigation.html:31
-msgid " User settings"
+msgid " Your wishlist"
 msgstr ""
 
 #: .\templates\layouts\navigation.html:33
-msgid " Change password"
+msgid " User settings"
 msgstr ""
 
 #: .\templates\layouts\navigation.html:35
+msgid " Change password"
+msgstr ""
+
+#: .\templates\layouts\navigation.html:37
 msgid " Logout"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:41
+#: .\templates\layouts\navigation.html:43
 msgid "Register"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:46 .\templates\registration\login.html:5
+#: .\templates\layouts\navigation.html:48 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
 #: .\templates\registration\login.html:29
 msgid "Login"
@@ -112,7 +116,7 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: .\templates\shop\cart.html:19
+#: .\templates\shop\cart.html:19 .\templates\shop\user_wish_list.html:21
 msgid "Product"
 msgstr ""
 
@@ -121,6 +125,7 @@ msgid "Size"
 msgstr ""
 
 #: .\templates\shop\cart.html:21 .\templates\shop\category.html:28
+#: .\templates\shop\user_wish_list.html:22
 msgid "Price"
 msgstr ""
 
@@ -181,7 +186,7 @@ msgid "Update profile"
 msgstr ""
 
 #: .\templates\shop\product_detail.html:96
-#: .\templates\shop\product_list.html:62
+#: .\templates\shop\product_list.html:61
 msgid "Add to Cart"
 msgstr ""
 
@@ -231,6 +236,22 @@ msgstr ""
 
 #: .\templates\shop\signup.html:25
 msgid "Register now"
+msgstr ""
+
+#: .\templates\shop\user_wish_list.html:8
+msgid "Your wishlist"
+msgstr ""
+
+#: .\templates\shop\user_wish_list.html:28
+msgid "IMG-Product"
+msgstr ""
+
+#: .\templates\shop\user_wish_list.html:39
+msgid "Delete"
+msgstr ""
+
+#: .\templates\shop\user_wish_list.html:47
+msgid "You have not added anything to wishlist!"
 msgstr ""
 
 #: .\views.py:28
