@@ -111,6 +111,8 @@ class Order(models.Model):
         blank=True,
         default='n',
     )
+    def get_cancel_order_url(self):
+        return reverse('shop:cancel_order', args=[str(self.id)])
 
 
 class Item(models.Model):

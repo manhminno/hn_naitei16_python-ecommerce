@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 09:10+0700\n"
+"POT-Creation-Date: 2021-08-23 11:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,31 +79,44 @@ msgstr "Thông tin"
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: .\templates\layouts\navigation.html:25
+#: .\templates\layouts\navigation.html:26
+#: .\templates\layouts\navigation.html:29
 msgid "Order"
 msgstr " giỏ hàng "
 
+#: .\templates\layouts\navigation.html:30
+msgid "Waiting Order"
+msgstr " Đơn hàng chờ xử lý "
+
 #: .\templates\layouts\navigation.html:31
+msgid "Canceled Order"
+msgstr " Đơn hàng đã hủy "
+
+#: .\templates\layouts\navigation.html:32
+msgid "History Order"
+msgstr " Lịch sử mua hàng "
+
+#: .\templates\layouts\navigation.html:39
 msgid " Your wishlist"
 msgstr " Đồ ưu thích"
 
-#: .\templates\layouts\navigation.html:33
+#: .\templates\layouts\navigation.html:41
 msgid " User settings"
 msgstr " Cài đặt người dùng"
 
-#: .\templates\layouts\navigation.html:35
+#: .\templates\layouts\navigation.html:43
 msgid " Change password"
 msgstr " Đổi mật khẩu"
 
-#: .\templates\layouts\navigation.html:37
+#: .\templates\layouts\navigation.html:45
 msgid " Logout"
 msgstr " Đăng xuất"
 
-#: .\templates\layouts\navigation.html:43
+#: .\templates\layouts\navigation.html:51
 msgid "Register"
 msgstr "Đăng ký"
 
-#: .\templates\layouts\navigation.html:48 .\templates\registration\login.html:5
+#: .\templates\layouts\navigation.html:56 .\templates\registration\login.html:5
 #: .\templates\registration\login.html:10
 #: .\templates\registration\login.html:29
 msgid "Login"
@@ -113,38 +126,70 @@ msgstr "Đăng nhập"
 msgid "Welcome to my shop!"
 msgstr "Chào mừng đến với cửa hàng của chúng tôi!"
 
-#: .\templates\shop\cart.html:8
+#: .\templates\shop\cart.html:8 .\templates\shop\payment.html:8
 msgid "Cart"
 msgstr "Giỏ hàng "
 
-#: .\templates\shop\cart.html:19 .\templates\shop\user_wish_list.html:21
+#: .\templates\shop\cart.html:22 .\templates\shop\payment.html:33
+#: .\templates\shop\user_wish_list.html:21
 msgid "Product"
 msgstr "Sản phẩm"
 
-#: .\templates\shop\cart.html:20
+#: .\templates\shop\cart.html:23 .\templates\shop\payment.html:34
 msgid "Size"
 msgstr "Cỡ"
 
-#: .\templates\shop\cart.html:21 .\templates\shop\category.html:28
-#: .\templates\shop\user_wish_list.html:22
+#: .\templates\shop\cart.html:24 .\templates\shop\category.html:28
+#: .\templates\shop\payment.html:35 .\templates\shop\user_wish_list.html:22
 msgid "Price"
 msgstr "Giá"
 
-#: .\templates\shop\cart.html:22
+#: .\templates\shop\cart.html:25 .\templates\shop\payment.html:36
 msgid "Quantity"
 msgstr "Số lượng"
 
-#: .\templates\shop\cart.html:23
+#: .\templates\shop\cart.html:26 .\templates\shop\cart.html:116
+#: .\templates\shop\payment.html:37 .\templates\shop\payment.html:64
 msgid "Total"
 msgstr "Tổng"
 
-#: .\templates\shop\cart.html:24
+#: .\templates\shop\cart.html:27
 msgid "Action"
 msgstr "Hành động"
 
-#: .\templates\shop\cart.html:73
-msgid "Update Cart"
-msgstr "Cập nhật"
+#: .\templates\shop\cart.html:75
+msgid "Proceed to Pay"
+msgstr "Tiến hành đặt hàng"
+
+#: .\templates\shop\cart.html:82
+msgid "Cart Totals"
+msgstr "Tổng hóa đơn"
+
+#: .\templates\shop\cart.html:86
+msgid "Subtotal"
+msgstr "Tổng"
+
+#: .\templates\shop\cart.html:94
+msgid "Shipping"
+msgstr "ĐƠn vị gia hàng"
+
+#: .\templates\shop\cart.html:98
+msgid "use shipping service VNC"
+msgstr "Sử dụng dịch vụ vận chuyển VNC"
+
+#: .\templates\shop\cart.html:102 .\templates\shop\cart.html:105
+#: .\templates\shop\payment.html:25
+msgid "address"
+msgstr "Địa chỉ"
+
+#: .\templates\shop\cart.html:108 .\templates\shop\cart.html:111
+#: .\templates\shop\payment.html:26
+msgid "phone"
+msgstr "Điện thoại"
+
+#: .\templates\shop\cart.html:125
+msgid "Proceed to Checkout"
+msgstr " Đặt hàng "
 
 #: .\templates\shop\category.html:7
 msgid "Categories"
@@ -185,6 +230,22 @@ msgstr "Thông tin của bạn"
 #: .\templates\shop\detail-profile.html:7
 msgid "Update profile"
 msgstr "Cập nhật"
+
+#: .\templates\shop\payment.html:19
+msgid "create at"
+msgstr "Ngày tạo"
+
+#: .\templates\shop\payment.html:21
+msgid "approve at"
+msgstr "Ngày xử lý "
+
+#: .\templates\shop\payment.html:23
+msgid "receiver"
+msgstr " Người nhận hàng"
+
+#: .\templates\shop\payment.html:68
+msgid "cancel order"
+msgstr "Hủy đơn hàng"
 
 #: .\templates\shop\product_detail.html:96
 #: .\templates\shop\product_list.html:61
@@ -263,9 +324,37 @@ msgstr "Đăng ký thành công, bạn có thể đăng nhập ngay bây giờ."
 msgid "Your password was successfully updated. Please log in again!"
 msgstr "Bạn đã thay đổi mật khẩu thành công. Vui lòng đăng nhập lại!"
 
-#: .\views.py:169 .\views.py:183
+#: .\views.py:176 .\views.py:191
 msgid "Not found item with ID = {}"
 msgstr " Không tìm thấy sản phẩm với id = "
+
+#: .\views.py:246
+msgid "order waiting for pending"
+msgstr "Đơn hàng chờ xử lý"
+
+#: .\views.py:248
+msgid "you have no pending orders"
+msgstr "Bạn không có đơn hàng nào chờ xử lý"
+
+#: .\views.py:261
+msgid "Not found order with ID = {}"
+msgstr " Không tìm thấy sản phẩm với id = "
+
+#: .\views.py:273 .\views.py:276
+msgid "order has been canceled"
+msgstr " Đơn hàng đã hủy "
+
+#: .\views.py:275
+msgid "you have no canceled orders"
+msgstr "Bạn không có đơn hàng đã hủy"
+
+#: .\views.py:284 .\views.py:287
+msgid "Purchased orders"
+msgstr " Lịch sử mua hàng "
+
+#: .\views.py:286
+msgid "you have no Purchase orders"
+msgstr " Bạn chưa đặt đơn hàng  "
 
 #~ msgid "Please correct the error below!"
 #~ msgstr "Hãy sửa các lỗi bên dưới!"

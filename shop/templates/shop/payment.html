@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+{% include "registration/messages.html" %}
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m background-cart">
+    <h2 class="l-text2 t-center">
+        {% trans "Cart" %}
+    </h2>
+</section>
+<section class="cart bgwhite p-t-70 p-b-100">
+    <div class="container">
+        <h3>{{tilte_name}}</h3>
+        {% if message %}
+            <p>{{message}}</p>
+        {% else %}
+            {% for order in list_order %}
+            <div class="payment" >
+                <p>{% trans "create at" %} : {{order.create_at}}</p>
+                {% if order.approve_at %}
+                    <p>{% trans "approve at" %} : {{order.approve_at}}</p>
+                {% endif %}
+                <p>{% trans "receiver" %} : {{user.first_name}} {{user.last_name}}</p>
+                <p>
+                    <span>{% trans "address" %} : {{order.address}}</span>
+                    <span>{% trans "phone" %} : {{order.phone}}</span>
+                </p>
+                <div class="container-table-cart pos-relative">
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table-shopping-cart">
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2">{% trans "Product" %}</th>
+                                <th class="column-3">{% trans "Size" %}</th>
+                                <th class="column-3">{% trans "Price" %}</th>
+                                <th class="column-4">{% trans "Quantity" %}</th>
+                                <th class="column-3">{% trans "Total" %}</th>
+                            </tr>
+                            {% for item in order.data %}
+                                <tr class="table-row">
+                                    <td class="column-1">
+                                        <div class="cart-img-product b-rad-4 o-f-hidden">
+                                            <img src="{% static item.url %}" alt="IMG-PRODUCT">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{item.product.get_absolute_url}}">{{item.product.name}}</a>
+                                        </li>
+                                    </td>
+                                    <td class="column-3">{{item.size.description}}</td>
+                                    <td class="column-3">{{item.product.price}}</td>
+                                    <td class="column-4">{{item.amount}}</td>
+                                    <td class="column-3">{{item.total}}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                    <span class="m-text22 w-size19 w-full-sm">
+                        {% trans "Total" %}: {{order.total}}
+                    </span>
+                    {% if title == 'WAITING_ORDER' %}
+                    <span class="m-text21 w-size20 w-full-sm">
+                        <button class="cancel_order"><a href="{{order.get_cancel_order_url}}">{% trans "cancel order" %}</a></button>
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}
