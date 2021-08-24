@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    console.log("!23")
     const imgs = $('.wrap-slick3-dots li a');
     const imgBtns = [...imgs];
     let imgId = 1;
     const imgshow = $('.preview-pic div');
-    console.log(imgBtns,imgshow[0].id);
-
+    let select_filter = $('#Idfilter select')[0];
+    select_filter.addEventListener("change", function() {
+        $('#Idfilter')[0].submit()
+      });
     imgshow[0].classList.add('active');
     imgBtns.forEach((imgItem) => {
         imgItem.addEventListener('click', (event) => {

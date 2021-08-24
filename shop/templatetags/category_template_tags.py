@@ -34,3 +34,14 @@ def categories_li_a():
                         """.format(i.name, i.name, i.name, i.name, mark_safe(parent_item))
         items_li_a += mark_safe(list_item) 
     return mark_safe(items_li_a)
+
+
+@register.simple_tag
+def relative_url(value, field_name, urlencode=None):
+    url = '?{}={}'.format(field_name, value)
+    if urlencode:
+        querystring = urlencode.split('&')
+        filtered_querystring = filter(lambda p: p.split('=')[0] != field_name, querystring)
+        encoded_querystring = '&'.join(filtered_querystring)
+        url = '{}&{}'.format(url, encoded_querystring)
+    return url
