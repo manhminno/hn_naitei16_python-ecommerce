@@ -7,14 +7,14 @@ from django.contrib import messages
 from django.forms import modelform_factory
 from django.shortcuts import redirect, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView,View,DetailView
+from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from shop.models import Item, Order, Product,Category, Size
 from .forms import SignUpForm
-from .utils.constant import LENGTH_PAGE, STATUS_ORDER
+from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
 import re
 
 
@@ -77,20 +77,23 @@ def change_password(request):
 class ShopView(ListView):
     model = Product
     paginate_by = LENGTH_PAGE
-    
     def get_context_data(self, **kwargs):
+        query = ""
+        product = Product.objects.all()
+        if self.request.GET:
+            query = self.request.GET.get('sorting', False) 
+            if query == FILTER['price low to high']:
+                product = product.order_by('price')
+            elif query == FILTER['price high to low']:
+                product = product.order_by('-price')
         if self.kwargs:
             category = Category.objects.filter(id=self.kwargs['pk']).first()
-            product = Product.objects.filter(category=category)
-            context = super().get_context_data(object_list=product,**kwargs)
-            list_data = context['object_list']
-            context['data'] = format_data(list_data)
-            return context
-        else:
-            context = super().get_context_data(**kwargs)
-            list_data = context['object_list']
-            context['data'] = format_data(list_data)
-            return context
+            product = product.filter(category=category)
+        context = super().get_context_data(object_list=product,**kwargs)
+        context['data'] = format_data(context['object_list'])
+        if query:
+            context['filter'] = query
+        return context
 
 
 class ProductDetailView(DetailView):
@@ -110,7 +113,7 @@ class ProductDetailView(DetailView):
 
 
 def product_search(request):
-    query = request.GET['search_product']
+    query = request.GET.get('search_product', False)
     value_search = re.split("\s", query, flags=re.UNICODE)
     arr_search = []
     for value in value_search:
