@@ -158,3 +158,4 @@ class Comment(models.Model):
     replyComment = models.ForeignKey('Comment', on_delete=models.SET_NULL, null=True, blank=True)
     create_at = models.DateField(null=True, blank=True, default=datetime.date.today)
     update_at = models.DateField(null=True, blank=True)
+    rate = models.IntegerField(default=1)

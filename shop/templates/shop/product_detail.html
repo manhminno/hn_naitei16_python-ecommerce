@@ -2,7 +2,8 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-<!-- Product Detail -->
+{% load crispy_forms_tags %}
+
 
 <div class="container bgwhite p-t-35 p-b-80">
     <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
@@ -98,12 +99,65 @@
                 </div>
             </form>
             <br>
-            <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-                <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-                    {% trans "Reviews" %} (0)
-                    <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-                    <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-                </h5>
+            <div class="wrap-dropdown-content bo7 p-t-15 p-b-14 " id="product-detail" product-id={{product.id}}>
+                <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+                    <h5 class="m-text19 trans-0-4">
+                        {% trans "Reviews" %} (<span id="comment_span">{{all_comment}}</span>)
+                    </h5>
+                </div>
+                <div class="comment-wrapper">
+                    {% for message in comment %}
+                        <div class="single-review">
+                            <div class="review-heading">
+                                <div><strong>{{ message.user.username }}</strong> <i class="fa fa-clock-o"></i> {{ message.create_at|date:"Y-m-d" }}</div>
+                                <div class="review-rating pull-right">
+                                    {% for i_star in range %}
+                                        <i class="fa fa-star{% if message.rate < i_star %}-o empty{% endif %}"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="review-body">
+                                {{ message.content }} 
+                                {% if message.user.username == user.username %}
+                                    <div class="review-rating pull-right">
+                                        <a href="{% url 'shop:delete_comment' message.id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+                {% if user.id is not None %}
+                    <form class="review-form" method="post" id="comment_form">
+                        {% csrf_token %}
+                        <div><strong>{{ user.username }}</strong></div>
+                        <div class="form-group">
+                            <div class="input-rating">
+                                <strong>{% trans "Your Rating: " %}</strong>
+                                <div class="stars">
+                                    <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                    <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                    <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                    <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                    <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="content" class="input" placeholder="{% trans 'Your review' %}" rows="3" cols="66"></textarea>
+                        </div>
+                        <button class="review-button flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                            {% trans "Review" %}
+                        </button>
+                    </form>
+                {% else %}
+                    {% trans "You must be logged in to post a review!" %}
+                    <i>
+                        <a href="{% url 'shop:signup' %}">{% trans "Register" %}</a> /
+                        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+                    </i>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -142,4 +196,5 @@
         </div>
     </div>
 </section>
+<script src="{% static 'js/comment.js' %}"></script>
 {% endblock content %}

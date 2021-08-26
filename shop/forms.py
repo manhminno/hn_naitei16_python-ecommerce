@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
-from .models import CustomUser
 from .utils.constant import REGEX
+from .models import CustomUser, Comment
 
 class SignUpForm(UserCreationForm):
     phone_regex = RegexValidator(REGEX, message=_('Wrong phone number format!'))
@@ -19,3 +19,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'phone', 'address', 'password1', 'password2')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content', 'rate']

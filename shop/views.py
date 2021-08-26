@@ -12,9 +12,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from shop.models import Item, Order, Product,Category, Size
-from .forms import SignUpForm
+from datetime import datetime
 from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
+from shop.models import Item, Order, Product,Category, Size, Comment
+from shop.forms import SignUpForm, CommentForm
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.forms.models import model_to_dict
 import re
 
 
@@ -109,6 +112,10 @@ class ProductDetailView(DetailView):
             url = value.url.split('.')
             id =  url[0]
             context['images'].append({'url': 'img/'+ value.url, 'id_img': id})
+        context['comment'] = context['product'].comment_set.order_by('-create_at')
+        context['all_comment'] = context['product'].comment_set.count()
+        context['range'] = range(1, 6)
+
         return context
 
 
@@ -311,3 +318,29 @@ def format_data_order(orders):
         setattr(order, "total", total) 
         list_order.append(order)
     return list_order
+
+
+@login_required
+def addcomment(request, id):
+    url = request.META.get('HTTP_REFERER') 
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = Comment()
+            data.content = form.cleaned_data['content']
+            data.rate = form.cleaned_data['rate']
+            data.product_id = id
+            data.user = request.user
+            data.save()
+            data_return = model_to_dict(data)
+            data_return['user'] = data.user.username
+            
+            return JsonResponse(data_return)
+
+    return HttpResponseBadRequest({'error':"404"}, content_type='application/json')
+
+@login_required
+def deletecomment(request, id):
+    cmt = get_object_or_404(Comment, id=id).delete()
+
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
