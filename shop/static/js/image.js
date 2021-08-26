@@ -3,10 +3,6 @@ $(document).ready(function () {
     const imgBtns = [...imgs];
     let imgId = 1;
     const imgshow = $('.preview-pic div');
-    let select_filter = $('#Idfilter select')[0];
-    select_filter.addEventListener("change", function() {
-        $('#Idfilter')[0].submit()
-      });
     imgshow[0].classList.add('active');
     imgBtns.forEach((imgItem) => {
         imgItem.addEventListener('click', (event) => {
