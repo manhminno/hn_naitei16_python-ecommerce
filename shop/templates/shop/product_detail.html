@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block content %}
 {% load crispy_forms_tags %}
-
+{% include "registration/messages.html" %}
 
 <div class="container bgwhite p-t-35 p-b-80">
     <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
@@ -61,6 +61,9 @@
             <p class="s-text8 p-t-10">
                 {{ object.description }}
             </p>
+            {% if message %}
+                <p>{{message}}</p>
+            {% endif %}
             <form class="p-t-33 p-b-60" action="{{ object.get_add_to_cart_url }}" method="post">
                 {% csrf_token %}
                 <div class="flex-m flex-w p-b-10">
@@ -68,26 +71,27 @@
                         Size
                     </div>
                     <div class="select-dropdown">
-                        <select class="p-t-10 p-r-10 p-l-10 p-b-10" name="size">
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
+                        <select class="p-t-10 p-r-10 p-l-10 p-b-10" id="size" name="size">
+                            {% for value in size %}
+                                <option value="{{value.size.description}}" size-amount="{{value.amount}}">{{value.size.description}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
+                <p id="quantity_left">quantity left : <span>{{size.first.amount}}</span> </p>
                 <div class="flex-r-m flex-w p-t-10">
                     <div class="w-size16 flex-m flex-w">
                         <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                            <p class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                                 <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                            </button>
+                            </p>
 
-                            <input class="size8 m-text18 t-center num-product" type="number" min="1" name="num-product"
+                            <input class="size8 m-text18 t-center num-product" id="number_size" type="number" min="1" max="{{size.first.amount}}" name="num-product"
                                 value="1">
 
-                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                            <p class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                 <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                            </button>
+                            </p>
                         </div>
 
                         <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10"
@@ -197,4 +201,5 @@
     </div>
 </section>
 <script src="{% static 'js/comment.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/size_product.js' %}" ></script>
 {% endblock content %}
