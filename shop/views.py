@@ -94,6 +94,10 @@ class ShopView(ListView):
             product = product.filter(category=category)
         context = super().get_context_data(object_list=product,**kwargs)
         context['data'] = format_data(context['object_list'])
+        if(self.request.user.is_authenticated):
+            context['user_wishlists'] = self.request.user.user_wishlist.all()
+        else:
+            context['user_wishlists'] = ""
         if query:
             context['filter'] = query
         return context
