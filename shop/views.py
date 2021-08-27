@@ -14,9 +14,9 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
-from shop.models import Item, Order, Product,Category, Size, Comment
+from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment
 from shop.forms import SignUpForm, CommentForm
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.forms.models import model_to_dict
 import re
 
@@ -108,6 +108,7 @@ class ProductDetailView(DetailView):
         category = context['product'].category
         product = Product.objects.filter(category=category)
         context['related_products'] = format_data(product)
+        context['size'] = context['product'].productsize_set.select_related('size')
         for value in context['product'].image_set.all():
             url = value.url.split('.')
             id =  url[0]
@@ -171,11 +172,19 @@ def add_to_cart(request,pk):
     obj, created = Order.objects.get_or_create(user = request.user, status = STATUS_ORDER['not_paid'])
     product = get_object_or_404(Product, id=pk)
     size = get_object_or_404(Size, description=request.POST['size'])
-    item, itemCreated = Item.objects.update_or_create(order = obj, product = product, size = size)
-    item.amount += int(request.POST['num-product'])
-    item.save()
-    obj.save()
-    return redirect('shop:cart_detail')
+    item, itemCreated = Item.objects.get_or_create(order = obj, product = product, size = size)
+    product_size = get_object_or_404(ProductSize, product = product, size = size)
+    try:
+        if int(request.POST['num-product']) <= product_size.amount :
+            item.amount += int(request.POST['num-product'])
+            item.save()
+            return redirect('shop:cart_detail')
+        else:
+            message = _("exceed the amount")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'),{'message': message})
+    except:
+        message = _("you entered the wrong number")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'),{'message': message})
 
 
 @login_required

@@ -276,3 +276,11 @@ all and (min-width: 992px) and (-webkit-transform-3d) {
         left: 0;
     }
 }
+.btn-num-product-down{
+    margin-bottom: 0px!important;
+    cursor: pointer;
+}
+.btn-num-product-up{
+    margin-bottom: 0px!important;
+    cursor: pointer;
+}
