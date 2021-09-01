@@ -2227,8 +2227,8 @@
 ///////////////////////////////////////////////////////////
 */
 /* ------------------------------------ */
-.text-white {color: white;}
-.text-black {color: black;}
+.text-white {color: white !important;}
+.text-black {color: black !important;}
 
 .text-hov-white:hover {color: white;}
 

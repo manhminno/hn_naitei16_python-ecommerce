@@ -1,1 +1,103 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<section class="slide1">
+    <div class="wrap-slick1">
+        <div class="slick1">
+            <div class="item-slick1 item2-slick1"
+                style="background-image: url({% static 'img/master-slide-03.webp' %});">
+                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                    <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15 wow animated"
+                        data-appear="rollIn">
+                        {% trans "Women Collection 2021" %}
+                    </span>
+                    <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37"
+                        data-appear="lightSpeedIn">
+                        {% trans "New arrivals" %}
+                    </h2>
+                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+                        <a href="shop" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            {% trans "Shop Now" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item-slick1 item2-slick1"
+                style="background-image: url({% static 'img/master-slide-02.webp' %});">
+                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                    <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15 wow animated" data-appear="rotateIn">
+                        {% trans "MHA Group" %}
+                    </span>
+                    <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInLeft">
+                        {% trans "Hello everybody" %}
+                    </h2>
+                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+                        <a href="shop" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                            {% trans "Shop Now" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% for sale in sales %}
+                <div class="item-slick1 item2-slick1" style="background-image: url({% static sale.url %});">
+                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                        <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37 text-black" data-appear="fadeInLeft">
+                            {{ sale.sale.description }}
+                        </h2>
+                        <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+                            <a href="{{sale.sale.get_absolute_url}}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4 text-black">
+                                {% trans "Shop Now" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="newproduct bgwhite p-t-45 p-b-105">
+    <div class="container">
+        <div class="sec-title p-b-60">
+            <h3 class="m-text5 t-center">
+                {% trans "Hot Products" %}
+            </h3>
+        </div>
+        <div class="wrap-slick2">
+            <div class="wrap-hot">
+                {% for hot_product in hot_products %}
+                <div class="item-slick2 p-l-15 p-r-15">
+                    <div class="block2">
+                        <div
+                            class="block2-img wrap-pic-w of-hidden pos-relative block2-label{{item.get_label_display}}">
+                            <a href="{{hot_product.product.get_absolute_url}}"><img src="{% static hot_product.url %}" alt="IMG-PRODUCT"></a>
+                        </div>
+                        <div class="block2-txt p-t-20">
+                            <a href="{{hot_product.product.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+                                {{ hot_product.product.name }}
+                            </a>
+                            <span class="block2-price m-text6 p-r-5" >
+                                ${{ hot_product.product.price }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container banner">
+    <div class="row ">
+        <div class='col ab1 wow animated' data-appear="fadeInLeft">
+            <a href="/shop"><img class="img1" alt="anh" src="{% static 'img/ao.jpg' %}"></img></a>
+        </div>
+        <div class='col ab2 wow animated' data-appear="fadeInRight">
+            <a href="/shop"><img class="img1" alt="anh" src="{% static 'img/quan.jpg' %}"></img></a>
+        </div>
+    </div>
+    <div class="row-2 ab3 wow animated" data-appear="fadeInUp">
+        <a href="/shop"><img class="img1" alt="anh" src="{% static 'img/vay.jpg' %}"></img></a>
+    </div>
+</section>
+{% endblock content %}

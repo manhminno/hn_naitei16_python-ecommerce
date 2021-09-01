@@ -200,6 +200,23 @@
     transform: scale(1);
 }
 
+.block2-labelpromotion::before {
+    background-color: #000;
+    content: 'Promotion';
+    width: 70px;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-outline-dark {
+    color: #000;
+    border-color: #000;
+}
+
 /*[ Slick3 ]
 ///////////////////////////////////////////////////////////
 */
@@ -355,4 +372,124 @@ button {
 
 button:hover {
     cursor: pointer;
+}
+
+/*[ Slick1 ]
+-----------------------------------------------------------
+*/
+.wrap-slick1 {
+    position: relative;
+}
+
+.item-slick1 {
+    height: 570px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.arrow-slick1 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    background-color: black;
+    opacity: 0;
+
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    z-index: 200;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.wrap-slick1:hover .arrow-slick1 {
+    opacity: 0.5;
+}
+
+.arrow-slick1:hover {
+    background-color: #e65540;
+}
+
+.next-slick1 {
+    right: 50px;
+    left: auto;
+}
+
+.prev-slick1 {
+    left: 50px;
+    right: auto;
+}
+
+.img1 {
+    width: 100%;
+}
+
+.banner {
+    background-color: #fff;
+    margin-top: 40px !important;
+    padding-bottom: 0 !important;
+}
+
+.banner .row {
+    margin-bottom: 20px !important;
+}
+
+/*[ Slick2 ]
+-----------------------------------------------------------
+*/
+.wrap-slick2 {
+    position: relative;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+/* ------------------------------------ */
+.slick-arrow {
+    position: absolute;
+    z-index: 100;
+    top: calc((100% - 70px) / 2);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 39px;
+    color: #cccccc;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.slick-arrow:hover {
+    color: #666666;
+}
+
+.slick-next {
+    right: -30px;
+}
+
+.slick-prev {
+    left: -30px;
+}
+.sale{
+    color: black !important;
 }
