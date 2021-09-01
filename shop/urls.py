@@ -18,6 +18,7 @@ urlpatterns = [
     path('history_order', views.history_order, name='history_order'),
     path('detail-profile', views.detail_profile, name='detail-profile'),
     path('logout', views.user_logout, name='logout'),
+    path('login', views.user_login, name='login'),
     url('signup', views.signup, name='signup'),
     path('change-password', views.change_password, name='change-password'),
     path("wishlist", views.wishlist, name="wishlist"),

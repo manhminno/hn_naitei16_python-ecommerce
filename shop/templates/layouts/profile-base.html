@@ -1,28 +1,41 @@
 {% load i18n %}
-{% load crispy_forms_tags%} 
-{% load static%} 
+{% load crispy_forms_tags %}
+{% load static  %}
 
-<h2 class="text-center mb-3">{{title}}</h2>
-<div class="row">
-    <div class="col text-right">
-        <img src="{% static 'img/avt.svg' %}" alt="Avatar" class="img-fluid" width="500" height="500" />
-    </div>
-    <div class="col">
-        <br>
-        <br>
-        <br>
-        <form method="POST" style="width:100%">
-            <div class="col-sm-4">
-                <label>{% trans "Email" %}</label>
-                <input readonly type="email" value="{{user.email}}" class="form-control">
-                <br>
+<div class="container">
+    <div class="card login-card">
+        <div class="row no-gutters">
+            <div class="col-md-5">
+                <img src="/static/img/jum4_1.jpg" alt="login" class="login-card-img">
             </div>
-            <div class="col-sm-12">
-                {% csrf_token %}
-                {{form|crispy}}
-                <br>
-                <button class="btn btn-success" type="submit">{{button_text}}</button>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <div class="brand-wrapper">
+                        <img src="/static/img/logo.png" alt="logo" class="logo">
+                    </div>
+                    <h3>{{title}}</h3>
+                    <br>
+                    {% include "registration/messages.html" %}
+                    <div class="form-group">
+                        <form method="post">
+                            <p class="p-label"><label>{% trans "Email" %}</label></p>
+                            <input readonly type="email" value="{{user.email}}" class="form-control">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <p class="p-label">{{ field.label_tag }} </p>
+                                <p class="p-signup">{{field}}</p>
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                            <br>
+                            <button class="btn btn-block login-btn mb-4">
+                                {{button_text}}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>

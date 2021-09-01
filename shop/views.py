@@ -38,6 +38,25 @@ def signup(request):
     
     return render(request, 'shop/signup.html', {'form': form})
 
+
+def user_login(request, method='POST'):
+    if request.method == 'POST':
+        email = request.POST.get('email', '')
+        password = request.POST.get('password', '')
+        user = authenticate(email=email, password=password)
+
+        if user is None:
+            my_message = _('Your email address or password is incorrect. Please login again!')
+            messages.error(request, my_message)
+
+            return render(request, "registration/login.html", {'next':'/'})
+
+        login(request, user)
+        return HttpResponseRedirect("/")
+    
+    return render(request, "registration/login.html", {'next':'/'})
+
+
 @login_required
 def detail_profile(request):
     UserEditForm = modelform_factory(
@@ -50,6 +69,9 @@ def detail_profile(request):
         form = UserEditForm(instance=request.user, data=request.POST or None)
         if form.is_valid():
             form.save()
+            my_message = _('You have successfully changed your personal information!')
+            messages.success(request, my_message)
+            
     return render(request, 'shop/detail-profile.html', {'form': form})
 
 @login_required
