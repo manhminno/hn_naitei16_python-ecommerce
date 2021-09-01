@@ -2,33 +2,37 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-<h2>{% trans "Login" %}</h2>
-{% block title %}
-    {% if category %}
-        {{ category.name }}
-    {% else %}
-        {% trans "Login" %}
-    {% endif %}
-{% endblock %}
-
 {% block content %}
+    <br>
+    <br>
+    <br>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <center><strong class="panel-title" style="color:green; font-size:25px;">{% trans "Welcome to my shop!" %}</strong></center>
-                    </div>
-                    <div class="panel-body">
-                        <center>
-                            <form accept-charset="UTF-8" role="form" method="post">
-                                {% include "registration/messages.html" %}
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                                <p></p>
-                                <input class="btn btn-lg btn-success btn-block" type="submit" value="{% trans 'Login' %}">
-                            </form>
-                        </center>
+        <div class="card login-card">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <img src="/static/img/dam4_4.jpg" alt="login" class="login-card-img">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <div class="brand-wrapper">
+                            <img src="/static/img/logo.png" alt="logo" class="logo">
+                        </div>
+                        <p class="login-card-description">{% trans "Welcome to my shop!" %}</p>
+                        {% include "registration/messages.html" %}
+                        <form method="post" action="{% url 'shop:login' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="{% translate 'Email address' %}">
+                            </div>
+                            <div class="form-group mb-4">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="{% translate 'Password' %}">
+                            </div>
+                            <button class="btn btn-block login-btn mb-4">
+                                {% trans "Login" %}
+                            </button>
+                        </form>
+                        <br>
+                        <p class="login-card-footer-text">{% trans "Don't have an account? " %}<a href="{% url 'shop:signup' %}" class="text-reset">{% trans "Register here" %}</a></p>
                     </div>
                 </div>
             </div>
