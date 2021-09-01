@@ -132,7 +132,7 @@ class Item(models.Model):
 class Sale(models.Model):
     value = models.FloatField()
     description = models.CharField(max_length=254, null=True)
-
+    url = models.CharField(max_length=254,null=True,blank=True)
     LOAN_TYPE = (
         ('p', 'Percent'),
         ('d', 'Direct'),
@@ -144,6 +144,10 @@ class Sale(models.Model):
         blank=True,
         default='p',
     )
+    
+    def get_absolute_url(self):
+        return reverse('shop:sale', args=[str(self.id)]) 
+    
 
 
 class SaleProduct(models.Model):

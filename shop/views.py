@@ -13,16 +13,30 @@ from django.db.models import Q
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
-from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment
-from shop.forms import SignUpForm, CommentForm
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.forms.models import model_to_dict
+from django.db.models import Sum
+from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
+from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment, Sale
+from shop.forms import SignUpForm, CommentForm
 import re
 
 
 def index(request):
-    return render(request, "index.html")
+    results = []
+    data = []
+    list_sale = []
+    results = Item.objects.select_related('product').values('product').annotate(sum=Sum('amount')).order_by('-sum')[:6]
+    sales = Sale.objects.all()
+    for value in sales:
+        url = 'img/'+ value.url
+        list_sale.append({'sale': value, 'url': url})
+    for value in results:
+        product = Product.objects.get(id = value['product'])
+        url = 'img/'+ product.image_set.first().url
+        data.append({'product': product, 'url': url})
+    return render(request, "index.html",{'hot_products':data, 'sales':list_sale})
+
 
 def signup(request):
     if request.method == 'POST':
