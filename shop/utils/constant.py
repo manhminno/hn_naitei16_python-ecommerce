@@ -11,3 +11,7 @@ FILTER = {
     'price low to high' : 'price_low_to_high',
     'price high to low' : 'price_high_to_low'
 }
+SALE = {
+    'percent' : 'p',
+    'direct' : 'd',
+}

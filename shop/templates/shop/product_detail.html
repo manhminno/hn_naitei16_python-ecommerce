@@ -46,21 +46,21 @@
             <h4 class="product-detail-name m-text16 p-b-13">
                 {{object.name}}
             </h4>
-            {% if object.discount_price %}
-            <span class="block2-oldprice m-text7 p-r-5" style="font-size: 1.5rem;">
-                ${{ object.price }}
-            </span>
-            <span class="block2-newprice m-text8 p-r-5" style="font-size: 1.5rem;">
-                ${{ object.discount_price }}
-            </span>
+            {% if price_sale %}
+                <span class="block2-oldprice m-text7 p-r-5" >
+                    ${{ object.price }}
+                </span>
+                <span class="block2-newprice m-text8 p-r-5" >
+                    ${{ price_sale }}
+                </span>
             {% else %}
-            <span class="m-text17">
-                ${{object.price}}
-            </span>
+                <span class="m-text6">
+                    ${{object.price}}
+                </span>
             {% endif %}
-            <p class="s-text8 p-t-10">
-                {{ object.description }}
-            </p>
+                <p class="s-text8 p-t-10">
+                    {{ object.description }}
+                </p>
             {% if message %}
                 <p>{{message}}</p>
             {% endif %}

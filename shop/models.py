@@ -144,10 +144,6 @@ class Sale(models.Model):
         blank=True,
         default='p',
     )
-    
-    def get_absolute_url(self):
-        return reverse('shop:sale', args=[str(self.id)]) 
-    
 
 
 class SaleProduct(models.Model):

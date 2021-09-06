@@ -22,6 +22,9 @@
                 {% if query %}
                     <h3>{% trans "Search results for" %} : {{query}}</h3>
                 {% endif %}
+                {% if sale %}
+                    <h3>{% trans "Promotions" %} : {{sale.description}}</h3>
+                {% endif %}
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <form class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10" action="{{request.get_full_path}}" name="Filter" id="Idfilter">
@@ -39,7 +42,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-label{{item.dislay}}">
                                 <img src="{% static item.url %}" alt="IMG-PRODUCT" style="height: 360px;">
                                 <div class="block2-overlay trans-0-4">
                                     {% if user.is_authenticated %}
@@ -64,9 +67,18 @@
                                 <a href="{{item.product.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
                                     {{item.product.name}}
                                 </a>
-                                <span class="block2-price m-text6 p-r-5">
-                                    ${{item.product.price}}
-                                </span>
+                                {% if item.product.price_sale %}
+                                    <span class="block2-oldprice m-text7 p-r-5">
+                                        ${{item.product.price}}
+                                    </span>
+                                    <span class="block2-newprice m-text8 p-r-5">
+                                        ${{item.product.price_sale}}
+                                    </span>
+                                {% else %}
+                                    <span class="block2-price m-text6 p-r-5">
+                                        ${{item.product.price}}
+                                    </span>
+                                {% endif %}      
                             </div>
                         </div>
                     </div>

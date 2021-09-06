@@ -16,8 +16,8 @@ from datetime import datetime
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.forms.models import model_to_dict
 from django.db.models import Sum
-from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER
-from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment, Sale
+from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER, SALE
+from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment, Sale, SaleProduct
 from shop.forms import SignUpForm, CommentForm
 import re
 
@@ -119,7 +119,16 @@ class ShopView(ListView):
     def get_context_data(self, **kwargs):
         query = ""
         product = Product.objects.all()
+        is_sale = False
         if self.request.GET:
+            id_sale = self.request.GET.get('sale', False)
+            if id_sale:
+                sale = get_object_or_404(Sale, id=id_sale)
+                list_product_sale = sale.saleproduct_set.select_related('product')
+                is_sale = True
+                product = []
+                for value in list_product_sale:
+                    product.append(value.product)
             query = self.request.GET.get('sorting', False) 
             if query == FILTER['price low to high']:
                 product = product.order_by('price')
@@ -130,6 +139,8 @@ class ShopView(ListView):
             product = product.filter(category=category)
         context = super().get_context_data(object_list=product,**kwargs)
         context['data'] = format_data(context['object_list'])
+        if is_sale:
+            context['sale'] = sale
         if(self.request.user.is_authenticated):
             context['user_wishlists'] = self.request.user.user_wishlist.all()
         else:
@@ -146,6 +157,15 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['images'] = []
         category = context['product'].category
+        sales = context['product'].saleproduct_set.select_related('sale')
+        price_sale = context['product'].price
+        for sale in sales:
+            if sale.sale.type == SALE['percent']:
+                price_sale = price_sale * sale.sale.value / 100
+            elif sale.sale.type == SALE['direct']:
+                price_sale = price_sale - sale.sale.value
+        if price_sale != context['product'].price:
+            context['price_sale'] = price_sale
         product = Product.objects.filter(category=category)
         context['related_products'] = format_data(product)
         context['size'] = context['product'].productsize_set.select_related('size')
@@ -259,7 +279,19 @@ def format_data(data):
     result = []
     for value in data:
         url = 'img/'+value.image_set.first().url
-        result.append({'product': value, 'image': value.image_set.first(),'url': url})
+        value_change = value
+        dislay = 'new'
+        product_sale = value.saleproduct_set.select_related('sale')
+        if  product_sale :
+            dislay = 'sale'
+            price_sale = value.price
+            for sale in product_sale:
+                if sale.sale.type == SALE['percent']:
+                    price_sale = price_sale * sale.sale.value / 100
+                elif sale.sale.type == SALE['direct']:
+                    price_sale = price_sale - sale.sale.value 
+            setattr(value_change, "price_sale", price_sale)
+        result.append({'product': value_change, 'image': value.image_set.first(), 'url': url, 'dislay': dislay})
     return result
 
 
