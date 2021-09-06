@@ -284,3 +284,7 @@ all and (min-width: 992px) and (-webkit-transform-3d) {
     margin-bottom: 0px!important;
     cursor: pointer;
 }
+.saletext{
+    text-decoration-line : line-through;
+    color: rgb(155, 14, 14);
+}
