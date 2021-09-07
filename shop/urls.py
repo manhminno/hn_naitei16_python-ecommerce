@@ -27,4 +27,8 @@ urlpatterns = [
     path("wishlist/remove_to_wishlist/<int:id>", views.remove_from_wishlist, name="remove_to_wishlist"),
     path('add_comment/<int:id>', views.addcomment, name='add_comment'),
     path('delete_comment/<int:id>', views.deletecomment, name='delete_comment'),
+    path('admin/all_order_manage', views.all_order_manage, name='all_order_manage'),
+    path('admin/order_manage', views.order_manage, name='order_manage'),
+    path('admin/finish_order/<int:pk>', views.finish_order, name='finish_order'),
+    path('admin/finish_order_detail', views.finish_order_detail, name='finish_order_detail'),
 ]

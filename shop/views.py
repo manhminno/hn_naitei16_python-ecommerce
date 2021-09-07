@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate, logout, update_session_auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.forms import modelform_factory
 from django.shortcuts import redirect, HttpResponseRedirect
@@ -12,13 +13,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.forms.models import model_to_dict
 from django.db.models import Sum
 from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER, SALE
 from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment, Sale, SaleProduct
 from shop.forms import SignUpForm, CommentForm
+import locale
 import re
 
 
@@ -425,3 +427,85 @@ def deletecomment(request, id):
     cmt = get_object_or_404(Comment, id=id).delete()
 
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+def format_money(money):
+    locale.setlocale(locale.LC_ALL, '')
+    money = locale.currency(money, grouping=True, symbol=False).replace(".00", "")
+
+    return money
+
+
+@staff_member_required
+def all_order_manage(request):
+    orders_w = Order.objects.filter(status = STATUS_ORDER['waitting'])
+    orders_p = Order.objects.filter(status = STATUS_ORDER['paid'])
+    
+    sum = 0
+    current_date = datetime.today()
+    orders_today = Order.objects.filter(approve_at = current_date, status = STATUS_ORDER['paid'])
+    data = format_data_order(orders_today)
+    for order in data:
+        sum += order.total
+
+    sum7day = 0
+    stdate = current_date - timedelta(days=6)
+    orders_7day = Order.objects.filter(approve_at__range=[stdate, current_date], status = STATUS_ORDER['paid'])
+    data = format_data_order(orders_7day)
+    for order in data:
+        sum7day += order.total
+
+    sum = format_money(sum)
+    sum7day = format_money(sum7day)
+
+    return render(request, 'shop/order_manage.html', {'orders_w': orders_w.count(), 'orders_p': orders_p.count(), "revenue": sum, "revenue7day": sum7day})
+    
+
+
+@staff_member_required
+def order_manage(request):
+    orders = Order.objects.filter(status = STATUS_ORDER['waitting'])
+    if orders:
+        list_order = format_data_order(orders)
+        return render(request,'shop/payment.html',{'list_order': list_order, 'tilte_name': _('Order management'), 'message':"", "title": "ORDER_MANAGE", "all_order": orders.count()})
+    else:
+        message = _("There are no pending orders!")
+        return render(request,'shop/payment.html',{'tilte_name': _('Order management'),'message': message, "all_order": orders.count()})
+
+
+@staff_member_required
+def finish_order(request, pk):
+    try:
+        order = Order.objects.filter(id = pk)
+        order.update(status=STATUS_ORDER['paid'])
+        order.update(approve_at=timezone.now())
+        
+        for item in order.item_set.all():
+            product_size = ProductSize.objects.filter(product=item.product.id, size=item.size)
+            new_amount = product_size.first().amount-item.amount
+            product_size.update(amount=new_amount)
+            
+        my_message = _('The order has been processed!')
+        messages.success(request, my_message)
+        
+        return redirect('shop:order_manage')
+    
+    except ObjectDoesNotExist:
+        message = _("Not found order with ID = {}").format(pk)
+        messages.error(request, message)
+        
+        return redirect('shop:order_manage')
+    
+    except:
+        return redirect('shop:order_manage')
+
+
+@staff_member_required
+def finish_order_detail(request):
+    orders = Order.objects.filter(status = STATUS_ORDER['paid'])
+    if orders:
+        list_order = format_data_order(orders)
+        return render(request,'shop/payment.html',{'list_order': list_order, 'tilte_name': _('Finished order'), 'message':"", "title": "FINISHED_ORDER", "all_order": orders.count()})
+    else:
+        message = _("No orders yet!")
+        return render(request,'shop/payment.html',{'tilte_name': _('Finished order'),'message': message, "all_order": orders.count()})

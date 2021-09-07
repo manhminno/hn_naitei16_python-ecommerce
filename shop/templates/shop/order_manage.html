@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m background-cart">
+        <h2 class="l-text2 t-center">
+            {% trans "Order management" %}
+        </h2>
+    </section>
+    <br>
+    <div class="content-body-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-two card-body">
+                            <a class="my-card" href="{% url 'shop:order_manage' %}">
+                                <div class="stat-content">
+                                    <div class="stat-text">{% trans "Pending Orders" %}</div>
+                                    <h2>{{orders_w}}</h2>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success w-100"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-two card-body">
+                            <a class="my-card" href="{% url 'shop:finish_order_detail' %}">
+                                <div class="stat-content">
+                                    <div class="stat-text">{% trans "Finished Orders" %}</div>
+                                    <h2>{{orders_p}}</h2>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary w-100"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-two card-body">
+                            <div class="stat-content">
+                                <div class="stat-text">{% trans "Today's Revenue" %}</div>
+                                <div class="stat-digit">
+                                    <h2>{{revenue}} <i>vnd</i></h2>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning w-100" role="progressbar" aria-valuenow="50"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="stat-widget-two card-body">
+                            <div class="stat-content">
+                                <div class="stat-text">{% trans "7-days Revenue" %}</div>
+                                <div class="stat-digit">
+                                    <h2>{{revenue7day}} <i>vnd</i></h2>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger w-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

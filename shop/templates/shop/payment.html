@@ -2,15 +2,24 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-{% include "registration/messages.html" %}
+
 <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m background-cart">
     <h2 class="l-text2 t-center">
-        {% trans "Cart" %}
+        {{tilte_name}}
     </h2>
 </section>
 <section class="cart bgwhite p-t-70 p-b-100">
     <div class="container">
-        <h3>{{tilte_name}}</h3>
+        {% include "registration/messages.html" %}
+        {% if user.is_staff %}
+            {% if title == 'ORDER_MANAGE' %}
+                <h3>{% trans "Number of pending orders: " %}{{all_order}}</h3>
+                <br>
+            {% else %}
+                <h3>{% trans "Number of orders processed: " %}{{all_order}}</h3>
+                <br>
+            {% endif %}
+        {% endif %}
         {% if message %}
             <p>{{message}}</p>
         {% else %}
@@ -20,11 +29,15 @@
                 {% if order.approve_at %}
                     <p>{% trans "approve at" %} : {{order.approve_at}}</p>
                 {% endif %}
-                <p>{% trans "receiver" %} : {{user.first_name}} {{user.last_name}}</p>
+                <p>{% trans "receiver" %} : {{order.user.first_name}} {{order.user.last_name}}</p>
                 <p>
-                    <span>{% trans "address" %} : {{order.address}}</span>
+                    <span>{% trans "address" %} : {{order.address}} | </span>
                     <span>{% trans "phone" %} : {{order.phone}}</span>
                 </p>
+                {% if user.is_staff %}
+                    <p>{% trans "Order account" %} : {{order.user.email}}</p>
+                    <p>{% trans "Order code" %} : {{order.user.username}}_{{order.user.phone}}</p>
+                {% endif %}
                 <div class="container-table-cart pos-relative">
                     <div class="wrap-table-shopping-cart bgwhite">
                         <table class="table-shopping-cart">
@@ -62,9 +75,13 @@
                         {% trans "Total" %}: {{order.total}}
                     </span>
                     {% if title == 'WAITING_ORDER' %}
-                    <span class="m-text21 w-size20 w-full-sm">
-                        <button class="cancel_order"><a href="{{order.get_cancel_order_url}}">{% trans "cancel order" %}</a></button>
-                    </span>
+                        <span class="m-text21 w-size20 w-full-sm">
+                            <button class="cancel_order"><a href="{{order.get_cancel_order_url}}">{% trans "cancel order" %}</a></button>
+                        </span>
+                    {% elif title == 'ORDER_MANAGE' %}
+                        <span class="m-text21 w-size20 w-full-sm">
+                            <button class="cancel_order"><a href="{{order.get_finish_order_url}}">{% trans "Finish" %}</a></button>
+                        </span>
                     {% endif %}
                 </div>
             </div>

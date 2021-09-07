@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-01 11:22+0700\n"
+"POT-Creation-Date: 2021-09-07 09:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,28 +123,36 @@ msgstr ""
 msgid " Logout"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:47
+#: .\templates\layouts\navigation.html:43
+msgid " Management"
+msgstr ""
+
+#: .\templates\layouts\navigation.html:45
+msgid " Order management"
+msgstr ""
+
+#: .\templates\layouts\navigation.html:56
 msgid " Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:49
+#: .\templates\layouts\navigation.html:58
 msgid " Waiting Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:51
+#: .\templates\layouts\navigation.html:60
 msgid " Canceled Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:53
+#: .\templates\layouts\navigation.html:62
 msgid " History Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:59
+#: .\templates\layouts\navigation.html:69
 #: .\templates\shop\product_detail.html:161 .\templates\shop\signup.html:31
 msgid "Register"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:64
+#: .\templates\layouts\navigation.html:74
 #: .\templates\registration\login.html:31
 #: .\templates\shop\product_detail.html:162
 msgid "Login"
@@ -166,30 +174,30 @@ msgstr ""
 msgid "Register here"
 msgstr ""
 
-#: .\templates\shop\cart.html:8 .\templates\shop\payment.html:8
+#: .\templates\shop\cart.html:8
 msgid "Cart"
 msgstr ""
 
-#: .\templates\shop\cart.html:22 .\templates\shop\payment.html:33
+#: .\templates\shop\cart.html:22 .\templates\shop\payment.html:46
 #: .\templates\shop\user_wish_list.html:21
 msgid "Product"
 msgstr ""
 
-#: .\templates\shop\cart.html:23 .\templates\shop\payment.html:34
+#: .\templates\shop\cart.html:23 .\templates\shop\payment.html:47
 msgid "Size"
 msgstr ""
 
-#: .\templates\shop\cart.html:24 .\templates\shop\payment.html:35
+#: .\templates\shop\cart.html:24 .\templates\shop\payment.html:48
 #: .\templates\shop\user_wish_list.html:22
 msgid "Price"
 msgstr ""
 
-#: .\templates\shop\cart.html:25 .\templates\shop\payment.html:36
+#: .\templates\shop\cart.html:25 .\templates\shop\payment.html:49
 msgid "Quantity"
 msgstr ""
 
 #: .\templates\shop\cart.html:26 .\templates\shop\cart.html:116
-#: .\templates\shop\payment.html:37 .\templates\shop\payment.html:62
+#: .\templates\shop\payment.html:50 .\templates\shop\payment.html:75
 msgid "Total"
 msgstr ""
 
@@ -218,12 +226,12 @@ msgid "use shipping service VNC"
 msgstr ""
 
 #: .\templates\shop\cart.html:102 .\templates\shop\cart.html:105
-#: .\templates\shop\payment.html:25
+#: .\templates\shop\payment.html:34
 msgid "address"
 msgstr ""
 
 #: .\templates\shop\cart.html:108 .\templates\shop\cart.html:111
-#: .\templates\shop\payment.html:26
+#: .\templates\shop\payment.html:35
 msgid "phone"
 msgstr ""
 
@@ -259,24 +267,64 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
+#: .\templates\shop\order_manage.html:8 .\views.py:464 .\views.py:467
+msgid "Order management"
+msgstr ""
+
+#: .\templates\shop\order_manage.html:20
+msgid "Pending Orders"
+msgstr ""
+
+#: .\templates\shop\order_manage.html:35
+msgid "Finished Orders"
+msgstr ""
+
+#: .\templates\shop\order_manage.html:49
+msgid "Today's Revenue"
+msgstr ""
+
+#: .\templates\shop\order_manage.html:65
+msgid "7-days Revenue"
+msgstr ""
+
+#: .\templates\shop\payment.html:16
+msgid "Number of pending orders: "
+msgstr ""
+
 #: .\templates\shop\payment.html:19
+msgid "Number of orders processed: "
+msgstr ""
+
+#: .\templates\shop\payment.html:28
 msgid "create at"
 msgstr ""
 
-#: .\templates\shop\payment.html:21
+#: .\templates\shop\payment.html:30
 msgid "approve at"
 msgstr ""
 
-#: .\templates\shop\payment.html:23
+#: .\templates\shop\payment.html:32
 msgid "receiver"
 msgstr ""
 
-#: .\templates\shop\payment.html:66
+#: .\templates\shop\payment.html:38
+msgid "Order account"
+msgstr ""
+
+#: .\templates\shop\payment.html:39
+msgid "Order code"
+msgstr ""
+
+#: .\templates\shop\payment.html:79
 msgid "cancel order"
 msgstr ""
 
+#: .\templates\shop\payment.html:83
+msgid "Finish"
+msgstr ""
+
 #: .\templates\shop\product_detail.html:101
-#: .\templates\shop\product_list.html:58
+#: .\templates\shop\product_list.html:61
 msgid "Add to Cart"
 msgstr ""
 
@@ -312,15 +360,19 @@ msgstr ""
 msgid "Search results for"
 msgstr ""
 
-#: .\templates\shop\product_list.html:29
+#: .\templates\shop\product_list.html:26
+msgid "Promotions"
+msgstr ""
+
+#: .\templates\shop\product_list.html:32
 msgid "Default Sorting"
 msgstr ""
 
-#: .\templates\shop\product_list.html:30
+#: .\templates\shop\product_list.html:33
 msgid "Price: low to high"
 msgstr ""
 
-#: .\templates\shop\product_list.html:31
+#: .\templates\shop\product_list.html:34
 msgid "Price: high to low"
 msgstr ""
 
@@ -340,62 +392,78 @@ msgstr ""
 msgid "You have not added anything to wishlist!"
 msgstr ""
 
-#: .\views.py:46
+#: .\views.py:48
 msgid "Successful registration, you can log in now."
 msgstr ""
 
-#: .\views.py:63
+#: .\views.py:65
 msgid "Your email address or password is incorrect. Please login again!"
 msgstr ""
 
-#: .\views.py:86
+#: .\views.py:88
 msgid "You have successfully changed your personal information!"
 msgstr ""
 
-#: .\views.py:102
+#: .\views.py:104
 msgid "Your password was successfully updated. Please log in again!"
 msgstr ""
 
-#: .\views.py:206
+#: .\views.py:228
 msgid "You have not ordered any products yet"
 msgstr ""
 
-#: .\views.py:223
+#: .\views.py:245
 msgid "exceed the amount"
 msgstr ""
 
-#: .\views.py:226
+#: .\views.py:248
 msgid "you entered the wrong number"
 msgstr ""
 
-#: .\views.py:236 .\views.py:251
+#: .\views.py:258 .\views.py:273
 msgid "Not found item with ID = {}"
 msgstr ""
 
-#: .\views.py:300 .\views.py:325
+#: .\views.py:334 .\views.py:359 .\views.py:489
 msgid "Not found order with ID = {}"
 msgstr ""
 
-#: .\views.py:310
+#: .\views.py:344
 msgid "order waiting for pending"
 msgstr ""
 
-#: .\views.py:312
+#: .\views.py:346
 msgid "you have no pending orders"
 msgstr ""
 
-#: .\views.py:337 .\views.py:340
+#: .\views.py:371 .\views.py:374
 msgid "order has been canceled"
 msgstr ""
 
-#: .\views.py:339
+#: .\views.py:373
 msgid "you have no canceled orders"
 msgstr ""
 
-#: .\views.py:348 .\views.py:351
+#: .\views.py:382 .\views.py:385
 msgid "Purchased orders"
 msgstr ""
 
-#: .\views.py:350
+#: .\views.py:384
 msgid "you have no Purchase orders"
+msgstr ""
+
+#: .\views.py:466
+msgid "There are no pending orders!"
+msgstr ""
+
+#: .\views.py:483
+msgid "The order has been processed!"
+msgstr ""
+
+#: .\views.py:503 .\views.py:506
+msgid "Finished order"
+msgstr ""
+
+#: .\views.py:505
+msgid "No orders yet!"
 msgstr ""
