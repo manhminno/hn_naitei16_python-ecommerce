@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-07 09:33+0700\n"
+"POT-Creation-Date: 2021-09-09 10:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,36 +124,32 @@ msgstr " Đổi mật khẩu"
 msgid " Logout"
 msgstr " Đăng xuất"
 
-#: .\templates\layouts\navigation.html:43
-msgid " Management"
-msgstr " Quản lý"
+#: .\templates\layouts\navigation.html:42
+msgid " Shop management"
+msgstr " Quản lý shop"
 
-#: .\templates\layouts\navigation.html:45
-msgid " Order management"
-msgstr " Quản lý đơn hàng"
-
-#: .\templates\layouts\navigation.html:56
+#: .\templates\layouts\navigation.html:52
 msgid " Order"
 msgstr " Giỏ hàng "
 
-#: .\templates\layouts\navigation.html:58
+#: .\templates\layouts\navigation.html:54
 msgid " Waiting Order"
 msgstr " Đơn hàng chờ xử lý "
 
-#: .\templates\layouts\navigation.html:60
+#: .\templates\layouts\navigation.html:56
 msgid " Canceled Order"
 msgstr " Đơn hàng đã hủy"
 
-#: .\templates\layouts\navigation.html:62
+#: .\templates\layouts\navigation.html:58
 msgid " History Order"
 msgstr " Lịch sử mua hàng "
 
-#: .\templates\layouts\navigation.html:69
+#: .\templates\layouts\navigation.html:65
 #: .\templates\shop\product_detail.html:161 .\templates\shop\signup.html:31
 msgid "Register"
 msgstr "Đăng ký"
 
-#: .\templates\layouts\navigation.html:74
+#: .\templates\layouts\navigation.html:70
 #: .\templates\registration\login.html:31
 #: .\templates\shop\product_detail.html:162
 msgid "Login"
@@ -268,9 +264,9 @@ msgstr "Thông tin của bạn"
 msgid "Update profile"
 msgstr "Cập nhật"
 
-#: .\templates\shop\order_manage.html:8 .\views.py:464 .\views.py:467
-msgid "Order management"
-msgstr "Quản lý đơn hàng"
+#: .\templates\shop\order_manage.html:8
+msgid "Shop management"
+msgstr "Quản lý shop"
 
 #: .\templates\shop\order_manage.html:20
 msgid "Pending Orders"
@@ -393,78 +389,122 @@ msgstr "Xóa"
 msgid "You have not added anything to wishlist!"
 msgstr "Bạn chưa thêm gì vào danh sách cả!"
 
-#: .\views.py:48
+#: .\utils\common.py:46 .\utils\common.py:71
+msgid "Order statistics in 30 days"
+msgstr "Thống kê đơn hàng trong 30 ngày qua"
+
+#: .\utils\common.py:47
+msgid "Number of orders"
+msgstr "Số đơn hàng"
+
+#: .\utils\common.py:48
+msgid "Day"
+msgstr "Ngày"
+
+#: .\utils\common.py:57
+msgid "All orders"
+msgstr "Tất cả đơn"
+
+#: .\utils\common.py:57 .\views.py:532 .\views.py:535
+msgid "Finished order"
+msgstr "Đơn thành công"
+
+#: .\utils\common.py:57 .\utils\common.py:62
+msgid "Canceled order"
+msgstr "Đơn bị hủy"
+
+#: .\utils\common.py:62
+msgid "Finished orders"
+msgstr "Đơn thành công"
+
+#: .\utils\common.py:87
+msgid "Review statistics in 30 days"
+msgstr "Thống kê đánh giá của người dùng trong 30 ngày qua"
+
+#: .\utils\common.py:88
+msgid "Number times"
+msgstr "Số lần"
+
+#: .\utils\common.py:89
+msgid "User rating"
+msgstr "Đánh giá của người dùng"
+
+#: .\views.py:49
 msgid "Successful registration, you can log in now."
 msgstr "Đăng ký thành công, bạn có thể đăng nhập ngay bây giờ."
 
-#: .\views.py:65
+#: .\views.py:66
 msgid "Your email address or password is incorrect. Please login again!"
 msgstr "Địa chỉ email hoặc mật khẩu không chính xác. Hãy đăng nhập lại!"
 
-#: .\views.py:88
+#: .\views.py:89
 msgid "You have successfully changed your personal information!"
 msgstr "Bạn đã thay đổi thông tin cá nhân thành công!"
 
-#: .\views.py:104
+#: .\views.py:105
 msgid "Your password was successfully updated. Please log in again!"
 msgstr "Bạn đã thay đổi mật khẩu thành công. Vui lòng đăng nhập lại!"
 
-#: .\views.py:228
+#: .\views.py:229
 msgid "You have not ordered any products yet"
 msgstr "Bạn chưa đặt sản phẩm nào cả!"
 
-#: .\views.py:245
+#: .\views.py:246
 msgid "exceed the amount"
 msgstr " vượt quá số lượng! "
 
-#: .\views.py:248
+#: .\views.py:249
 msgid "you entered the wrong number"
 msgstr "bạn đã nhập sai số"
 
-#: .\views.py:258 .\views.py:273
+#: .\views.py:259 .\views.py:274
 msgid "Not found item with ID = {}"
 msgstr " Không tìm thấy sản phẩm với id = "
 
-#: .\views.py:334 .\views.py:359 .\views.py:489
+#: .\views.py:335 .\views.py:360 .\views.py:518
 msgid "Not found order with ID = {}"
 msgstr " Không tìm thấy sản phẩm với id = "
 
-#: .\views.py:344
+#: .\views.py:345
 msgid "order waiting for pending"
 msgstr "Đơn hàng chờ xử lý"
 
-#: .\views.py:346
+#: .\views.py:347
 msgid "you have no pending orders"
 msgstr "Bạn không có đơn hàng nào chờ xử lý"
 
-#: .\views.py:371 .\views.py:374
+#: .\views.py:372 .\views.py:375
 msgid "order has been canceled"
 msgstr " Đơn hàng đã hủy "
 
-#: .\views.py:373
+#: .\views.py:374
 msgid "you have no canceled orders"
 msgstr "Bạn không có đơn hàng đã hủy"
 
-#: .\views.py:382 .\views.py:385
+#: .\views.py:383 .\views.py:386
 msgid "Purchased orders"
 msgstr " Lịch sử mua hàng "
 
-#: .\views.py:384
+#: .\views.py:385
 msgid "you have no Purchase orders"
 msgstr " Bạn chưa đặt đơn hàng  "
 
-#: .\views.py:466
+#: .\views.py:478
+msgid "star"
+msgstr "sao"
+
+#: .\views.py:494 .\views.py:497
+msgid "Order management"
+msgstr "Quản lý đơn hàng"
+
+#: .\views.py:496
 msgid "There are no pending orders!"
 msgstr "Không có đơn nào đang chờ xử lý!"
 
-#: .\views.py:483
+#: .\views.py:512
 msgid "The order has been processed!"
 msgstr "Đơn hàng đã được xử lý!"
 
-#: .\views.py:503 .\views.py:506
-msgid "Finished order"
-msgstr "Đơn đã xử lý"
-
-#: .\views.py:505
+#: .\views.py:534
 msgid "No orders yet!"
 msgstr "Chưa có đơn nào!"

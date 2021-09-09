@@ -38,12 +38,8 @@
                         </ul>
                     </li>
                     {% if user.is_staff %}
-                        &nbsp&nbsp
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><span>{% trans " Management" %}</span></a>
-                            <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="{% url 'shop:all_order_manage' %}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>{% trans " Order management" %}</a></li>
-                            </ul>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'shop:all_order_manage' %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{% trans " Shop management" %}</a></li>
                         </li>
                     {% else %}
                         &nbsp&nbsp

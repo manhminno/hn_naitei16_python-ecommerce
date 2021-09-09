@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-07 09:33+0700\n"
+"POT-Creation-Date: 2021-09-09 10:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,36 +123,32 @@ msgstr ""
 msgid " Logout"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:43
-msgid " Management"
+#: .\templates\layouts\navigation.html:42
+msgid " Shop management"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:45
-msgid " Order management"
-msgstr ""
-
-#: .\templates\layouts\navigation.html:56
+#: .\templates\layouts\navigation.html:52
 msgid " Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:58
+#: .\templates\layouts\navigation.html:54
 msgid " Waiting Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:60
+#: .\templates\layouts\navigation.html:56
 msgid " Canceled Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:62
+#: .\templates\layouts\navigation.html:58
 msgid " History Order"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:69
+#: .\templates\layouts\navigation.html:65
 #: .\templates\shop\product_detail.html:161 .\templates\shop\signup.html:31
 msgid "Register"
 msgstr ""
 
-#: .\templates\layouts\navigation.html:74
+#: .\templates\layouts\navigation.html:70
 #: .\templates\registration\login.html:31
 #: .\templates\shop\product_detail.html:162
 msgid "Login"
@@ -267,8 +263,8 @@ msgstr ""
 msgid "Update profile"
 msgstr ""
 
-#: .\templates\shop\order_manage.html:8 .\views.py:464 .\views.py:467
-msgid "Order management"
+#: .\templates\shop\order_manage.html:8
+msgid "Shop management"
 msgstr ""
 
 #: .\templates\shop\order_manage.html:20
@@ -392,78 +388,122 @@ msgstr ""
 msgid "You have not added anything to wishlist!"
 msgstr ""
 
-#: .\views.py:48
-msgid "Successful registration, you can log in now."
+#: .\utils\common.py:46 .\utils\common.py:71
+msgid "Order statistics in 30 days"
 msgstr ""
 
-#: .\views.py:65
-msgid "Your email address or password is incorrect. Please login again!"
+#: .\utils\common.py:47
+msgid "Number of orders"
 msgstr ""
 
-#: .\views.py:88
-msgid "You have successfully changed your personal information!"
+#: .\utils\common.py:48
+msgid "Day"
 msgstr ""
 
-#: .\views.py:104
-msgid "Your password was successfully updated. Please log in again!"
+#: .\utils\common.py:57
+msgid "All orders"
 msgstr ""
 
-#: .\views.py:228
-msgid "You have not ordered any products yet"
-msgstr ""
-
-#: .\views.py:245
-msgid "exceed the amount"
-msgstr ""
-
-#: .\views.py:248
-msgid "you entered the wrong number"
-msgstr ""
-
-#: .\views.py:258 .\views.py:273
-msgid "Not found item with ID = {}"
-msgstr ""
-
-#: .\views.py:334 .\views.py:359 .\views.py:489
-msgid "Not found order with ID = {}"
-msgstr ""
-
-#: .\views.py:344
-msgid "order waiting for pending"
-msgstr ""
-
-#: .\views.py:346
-msgid "you have no pending orders"
-msgstr ""
-
-#: .\views.py:371 .\views.py:374
-msgid "order has been canceled"
-msgstr ""
-
-#: .\views.py:373
-msgid "you have no canceled orders"
-msgstr ""
-
-#: .\views.py:382 .\views.py:385
-msgid "Purchased orders"
-msgstr ""
-
-#: .\views.py:384
-msgid "you have no Purchase orders"
-msgstr ""
-
-#: .\views.py:466
-msgid "There are no pending orders!"
-msgstr ""
-
-#: .\views.py:483
-msgid "The order has been processed!"
-msgstr ""
-
-#: .\views.py:503 .\views.py:506
+#: .\utils\common.py:57 .\views.py:532 .\views.py:535
 msgid "Finished order"
 msgstr ""
 
-#: .\views.py:505
+#: .\utils\common.py:57 .\utils\common.py:62
+msgid "Canceled order"
+msgstr ""
+
+#: .\utils\common.py:62
+msgid "Finished orders"
+msgstr ""
+
+#: .\utils\common.py:87
+msgid "Review statistics in 30 days"
+msgstr ""
+
+#: .\utils\common.py:88
+msgid "Number times"
+msgstr ""
+
+#: .\utils\common.py:89
+msgid "User rating"
+msgstr ""
+
+#: .\views.py:49
+msgid "Successful registration, you can log in now."
+msgstr ""
+
+#: .\views.py:66
+msgid "Your email address or password is incorrect. Please login again!"
+msgstr ""
+
+#: .\views.py:89
+msgid "You have successfully changed your personal information!"
+msgstr ""
+
+#: .\views.py:105
+msgid "Your password was successfully updated. Please log in again!"
+msgstr ""
+
+#: .\views.py:229
+msgid "You have not ordered any products yet"
+msgstr ""
+
+#: .\views.py:246
+msgid "exceed the amount"
+msgstr ""
+
+#: .\views.py:249
+msgid "you entered the wrong number"
+msgstr ""
+
+#: .\views.py:259 .\views.py:274
+msgid "Not found item with ID = {}"
+msgstr ""
+
+#: .\views.py:335 .\views.py:360 .\views.py:518
+msgid "Not found order with ID = {}"
+msgstr ""
+
+#: .\views.py:345
+msgid "order waiting for pending"
+msgstr ""
+
+#: .\views.py:347
+msgid "you have no pending orders"
+msgstr ""
+
+#: .\views.py:372 .\views.py:375
+msgid "order has been canceled"
+msgstr ""
+
+#: .\views.py:374
+msgid "you have no canceled orders"
+msgstr ""
+
+#: .\views.py:383 .\views.py:386
+msgid "Purchased orders"
+msgstr ""
+
+#: .\views.py:385
+msgid "you have no Purchase orders"
+msgstr ""
+
+#: .\views.py:478
+msgid "star"
+msgstr ""
+
+#: .\views.py:494 .\views.py:497
+msgid "Order management"
+msgstr ""
+
+#: .\views.py:496
+msgid "There are no pending orders!"
+msgstr ""
+
+#: .\views.py:512
+msgid "The order has been processed!"
+msgstr ""
+
+#: .\views.py:534
 msgid "No orders yet!"
 msgstr ""

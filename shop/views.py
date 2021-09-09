@@ -18,6 +18,7 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedire
 from django.forms.models import model_to_dict
 from django.db.models import Sum
 from .utils.constant import LENGTH_PAGE, STATUS_ORDER, FILTER, SALE
+from .utils.common import get_month_dict, get_sum_values, draw_order_barchart, draw_order_circlechart, draw_reviews_barchart
 from shop.models import Item, Order, Product,Category, ProductSize, Size, Comment, Sale, SaleProduct
 from shop.forms import SignUpForm, CommentForm
 import locale
@@ -457,6 +458,29 @@ def all_order_manage(request):
 
     sum = format_money(sum)
     sum7day = format_money(sum7day)
+
+    a_month = current_date - timedelta(days=30)
+    orders_month = Order.objects.filter(create_at__range=[a_month, current_date])
+    
+    orders_c_month = Order.objects.filter(create_at__range=[a_month, current_date], status = STATUS_ORDER['cancel'])
+    orders_p_month = Order.objects.filter(create_at__range=[a_month, current_date], status = STATUS_ORDER['paid'])
+
+    keys, values = get_month_dict(orders_month)
+    keys_cancel, values_cancle = get_month_dict(orders_c_month)
+    keys_finish, values_finish = get_month_dict(orders_p_month)
+
+    all_order = get_sum_values(values)
+    finish_order = get_sum_values(values_finish)
+    cancel_order = get_sum_values(values_cancle)
+
+    list_star = {}
+    for n_star in range(1,6):
+        star = {str(n_star)+ str(_('star')): Comment.objects.filter(rate=n_star).count()}
+        list_star.update(star)
+
+    draw_order_barchart(values, values_finish, values_cancle, keys)
+    draw_order_circlechart(cancel_order, all_order)
+    draw_reviews_barchart(list_star)
 
     return render(request, 'shop/order_manage.html', {'orders_w': orders_w.count(), 'orders_p': orders_p.count(), "revenue": sum, "revenue7day": sum7day})
     
